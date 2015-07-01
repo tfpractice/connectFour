@@ -54,4 +54,12 @@ describe('Node', function() {
     		expect(myNode.neighbors["ct"]).toBe(myCTNeighbor);
     	});
     });
+    describe('#checkNeighborPlayer', function() {
+    	it('verifies that neighboring nodes have the same player', function() {
+    		myNode.setNeighbor("ct", myCTNeighbor);
+			myNode.placeToken(myToken);
+			myCTNeighbor.placeToken(myToken);
+			expect(myNode.player).toBe(myCTNeighbor.player);    		
+    	});
+    });
 });
