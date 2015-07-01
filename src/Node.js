@@ -14,3 +14,7 @@ Node.prototype.placeToken = function(token) {
 	console.log(this.player);
 
 };
+
+Node.prototype.setNeighbor = function(relationCode, nNode) {
+	this.neighbors[relationCode]= nNode;
+};

@@ -30,8 +30,8 @@ Column.prototype.setVerticalNeighbors = function() {
 	for (var i = 0; i < this.nodes.length - 1; i++) {
 		var currNode = this.nodes[i];
 		var nextNode = this.nodes[i+1];
-		currNode.neighbors["cb"] = nextNode;
-		nextNode.neighbors["ct"] = currNode; 
+		currNode.setNeighbor("cb", nextNode);
+		nextNode.setNeighbor("ct", currNode); 
    	};
 };
 
