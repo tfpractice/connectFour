@@ -6,3 +6,11 @@ function Node (colID, rowID) {
 	this.token= null;
 }
 
+
+Node.prototype.placeToken = function(token) {
+	this.occupied = true;
+	this.player = token.player;
+	this.token = token;
+	console.log(this.player);
+
+};
