@@ -28,6 +28,9 @@ describe('Node', function() {
         it('initializes with no token ', function() {
             expect(myNode.token).toEqual(null);
         });
+        it('initializes with no color ', function() {
+            expect(myNode.color).toEqual("none");
+        });
     });
 
     describe('#placeToken', function() {
@@ -61,5 +64,11 @@ describe('Node', function() {
 			myCTNeighbor.placeToken(myToken);
 			expect(myNode.player).toBe(myCTNeighbor.player);    		
     	});
+    });
+    describe('#changeColor', function() {
+        it('changes node color based on token', function() {
+            myNode.changeColor(myToken);
+            expect(myNode.color).toBe(myToken.color);
+        });
     });
 });

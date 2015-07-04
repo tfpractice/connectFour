@@ -37,7 +37,7 @@ Column.prototype.setVerticalNeighbors = function() {
 
 
 Column.prototype.decrementIndex = function() {
-	this.freeIndex --;
+	this.freeIndex--;
 };
 
 Column.prototype.placeToken = function(token) {

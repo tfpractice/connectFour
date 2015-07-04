@@ -4,6 +4,7 @@ function Node (colID, rowID) {
 	this.player = null;
 	this.neighbors = {};
 	this.token= null;
+	this.color  = "none";
 }
 
 
@@ -11,10 +12,14 @@ Node.prototype.placeToken = function(token) {
 	this.occupied = true;
 	this.player = token.player;
 	this.token = token;
-	console.log(this.player);
+	// console.log(this.player);
 
 };
 
 Node.prototype.setNeighbor = function(relationCode, nNode) {
 	this.neighbors[relationCode]= nNode;
+};
+
+Node.prototype.changeColor = function(token) {
+	this.color = token.color;
 };
