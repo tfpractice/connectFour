@@ -72,7 +72,8 @@ describe('Board', function() {
 
             };
 
-            expect(myBoard.placeToken(trialToken, 2)).toBeFalsy();
+            // expect(myBoard.placeToken(trialToken, 2)).toBeFalsy();
+            expect(myBoard.placeToken(trialToken, 2)).toThrowAnyError();
         });
     });
 });

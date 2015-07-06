@@ -57,14 +57,16 @@ Board.prototype.placeToken = function(token, colIndex) {
     var currCol = this.columns[colIndex];
     try {
         if (currCol.isAvailable() == false) {
-        	return false;
-            throw new Error("column not free, please select another")
+        	
+            throw new Error("column not free, please select another");
+            
         } else {
             currCol.placeToken(token);
             return true;
-        };
+        }
 
-    } catch (err) {
-        alert(err.message);
+    } catch(e) {
+        alert(e.message);
+        return false;
     }
 };
