@@ -41,6 +41,18 @@ describe('Column', function() {
         it('determines if there is an unoccupied node', function() {
             expect(myColumn.isAvailable).toBeTruthy();
         });
+
+        it('returns false if the freeIndex is less than zero', function() {
+            tmpColumn = new Column(3,6);
+            tmpPlayer = new Player("zach");
+            for (var i = 0; i < 6; i++) {
+               tempToken = new Token(tmpPlayer, "#ff00ff" );
+               tmpColumn.placeToken(tempToken);
+
+            };
+
+            expect(tmpColumn.isAvailable()).toBeFalsy();
+        });
     });
     describe('#setVerticalNeighbors', function() {
         it('establishes the vertically adjacent nodes', function() {

@@ -1,7 +1,9 @@
 describe('Board', function() {
-    var myBoard;
+    var myBoard, myPlayer, myToken;
     beforeEach(function() {
         myBoard = new Board(7, 6);
+        myPlayer = new Player("John");
+        myToken = new Token(myPlayer, "#000000");
 
     });
 
@@ -44,11 +46,33 @@ describe('Board', function() {
     });
 
     describe('setNDNeighbors', function() {
-    	it('sets the lt and rb neighbors for each node', function() {
-    		 myBoard.setNDNeighbors();
+        it('sets the lt and rb neighbors for each node', function() {
+            myBoard.setNDNeighbors();
             var node_2_3 = myBoard.columns[2].nodes[3];
             var node_3_4 = myBoard.columns[3].nodes[4];
             expect(node_2_3.neighbors['rb']).toBe(node_3_4);
-    	});
+        });
+    });
+
+    describe('placeToken', function() {
+        it('places a token in a column', function() {
+            var tmpColumn = myBoard.columns[2];
+
+            myBoard.placeToken(myToken, 2);
+            expect(tmpColumn.freeIndex).toBe(4);
+
+        });
+
+        it('returns false if selected Column is not available', function() {
+            var tmpColumn = myBoard.columns[2];
+            var trialToken = new Token(myPlayer, "#ff00ff");
+            for (var i = 0; i < 6; i++) {
+                tempToken = new Token(myPlayer, "#ff00ff");
+                tmpColumn.placeToken(tempToken);
+
+            };
+
+            expect(myBoard.placeToken(trialToken, 2)).toBeFalsy();
+        });
     });
 });
