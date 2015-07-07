@@ -63,7 +63,7 @@ describe('Board', function() {
 
         });
 
-        it('returns false if selected Column is not available', function() {
+        it('throws an error /returns false if selected Column is not available', function() {
             var tmpColumn = myBoard.columns[2];
             var trialToken = new Token(myPlayer, "#ff00ff");
             for (var i = 0; i < 6; i++) {
