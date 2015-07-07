@@ -44,3 +44,33 @@ Node.prototype.getMatchingNeighbors = function() {
     };
     return matchingNeighbors;
 };
+
+Node.prototype.getComponent = function(nNode, relationCode) {
+
+    try {
+        if (this.checkMatch(nNode) == false) {
+            throw new Error("nodes do not belong to same player");
+        } else if (this.confirmNeighborStatus(nNode, relationCode) == false) {
+            throw new Error("these nodes are not neighbors");
+        } else if ((this.checkMatch(nNode) == true) && (this.confirmNeighborStatus(nNode, relationCode) == true)) {
+            return new Component(this, nNode, relationCode);
+        }
+
+    } catch (err) {
+        alert(err.message);
+    }
+
+
+};
+
+Node.prototype.confirmNeighborStatus = function(nNode, relationCode) {
+    return this.neighbors[relationCode] == nNode;
+};
+Node.prototype.checkMatch = function(nNode) {
+
+    if (this.occupied == false) {
+        return false;
+    } else if (this.occupied == true) {
+        return nNode.player == this.player;
+    };
+};

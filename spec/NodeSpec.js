@@ -82,21 +82,45 @@ describe('Node', function() {
         });
     });
 
-    describe('getMatchingNeighbors', function() {
-        it('retuns an array of neighboring nodes with the same player attribute', function() {
+    describe('interNode Comparison', function() {
+        beforeEach(function() {
             myNode.setNeighbor("ct", myCTNeighbor);
             myNode.placeToken(myToken);
             myCTNeighbor.placeToken(myToken);
-            expect(myNode.getMatchingNeighbors()).toBeArray();
-
         });
 
-        it('will return an array containing neighboring matched nodes', function() {
-            myNode.setNeighbor("ct", myCTNeighbor);
-            myNode.placeToken(myToken);
-            myCTNeighbor.placeToken(myToken);
+        describe('getMatchingNeighbors', function() {
+            it('retuns an array of neighboring nodes with the same player attribute', function() {
 
-            expect(myNode.getMatchingNeighbors()).toContain(myCTNeighbor);
+                expect(myNode.getMatchingNeighbors()).toBeArray();
+
+            });
+
+            it('will return an array containing neighboring matched nodes', function() {
+
+                expect(myNode.getMatchingNeighbors()).toContain(myCTNeighbor);
+            });
+        });
+
+        describe('#getComponent', function() {
+            it('returns a new component based on the matching neighboring nodes', function() {
+                var myComponent = new Component(myNode, myCTNeighbor, "ct");
+                expect(myNode.getComponent(myCTNeighbor, "ct")).toEqual(myComponent);
+            });
+        });
+
+        describe('#checkMatch', function() {
+            it('ensures that another ndoe has the same player', function() {
+                expect(myNode.checkMatch(myCTNeighbor)).toBe(true);
+            });
+        });
+
+
+        describe('#confirmNeighborStatus', function() {
+            it('confirms that nodes are in fact neighboring', function() {
+                expect(myNode.confirmNeighborStatus(myCTNeighbor, "ct")).toBeTrue();
+            });
         });
     });
+
 });
