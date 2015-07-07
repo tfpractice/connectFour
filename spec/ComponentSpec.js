@@ -94,8 +94,6 @@ describe('Component', function() {
             expect(myComponent.nodes).toEqual(nodeUnion);
         });
     });
-
-
     describe('checkDirection', function() {
         it('determines if two components share the same direction', function() {
             expect(myComponent.checkDirection(my2Component)).toBeTrue();

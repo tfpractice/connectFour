@@ -78,9 +78,7 @@ describe('Player', function() {
             console.log(myComponent);
             var resultComponent = myPlayer.getComponent(n1, n2, "rt");
             console.log(resultComponent);
-            // console.log(myPlayer.getComponent());
             expect(resultComponent).toEqual(myComponent);
-            // expect(myPlayer.getComponent(n1, n2, "rt")).toBeTrue();
 
         });
     });
