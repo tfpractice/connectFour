@@ -1,4 +1,4 @@
-describe('Token', function() {
+fdescribe('Token', function() {
 	var p1Token, p2Token, p1, p2;
 	beforeEach(function() {
 		p1 = new Player("Jack");

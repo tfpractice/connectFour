@@ -44,7 +44,7 @@ describe('Player', function() {
         var myComponent, n2n3Component;
         beforeEach(function() {
             myComponent = new Component(n1, n2, "rt");
-            console.log(myComponent);
+            //console.log(myComponent);
             n2n3Component = new Component(n2, n3, "rt");
             myPlayer.addComponent(myComponent);
 
@@ -104,6 +104,12 @@ describe('Player', function() {
         describe('evaluateUniqueness', function() {
             it('determines if a component warrants a unique entry in the components array ', function() {
                 expect(myPlayer.evaluateUniqueness(n2n3Component)).toBeFalse();
+            });
+        });
+
+        describe('aritySort', function() {
+            it('sorts connected components by arity', function() {
+                
             });
         });
 

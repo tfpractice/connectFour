@@ -1,13 +1,16 @@
-describe('Node', function() {
+fdescribe('Node', function() {
     var myNode;
     var myCTNeighbor;
 
     beforeEach(function() {
         myNode = new Node(1, 3);
+        console.log(myNode);
         myCTNeighbor = new Node(1, 2);
+        console.log(myCTNeighbor);
         myPlayer = new Player("John");
         myToken = new Token(myPlayer, "#000000");
         mySecondToken = new Token(myPlayer, "#000000");
+
     });
     describe('initiallization', function() {
         it('initializes with a column index', function() {
@@ -35,7 +38,11 @@ describe('Node', function() {
 
     describe('#placeToken', function() {
         beforeEach(function() {
+            myNode.setNeighbor("ct", myCTNeighbor);
+
             myNode.placeToken(myToken);
+            myCTNeighbor.placeToken(myToken);
+
         });
         it('sets the nodes token attribute', function() {
 
@@ -48,6 +55,10 @@ describe('Node', function() {
         });
         it('sets the player attribute', function() {
             expect(myNode.player).toBe(myPlayer);
+        });
+
+        it('returns true if neighboring nodes have same player', function() {
+            expect(myNode.checkMatchingNeighbors()).toBeTrue();
         });
     });
 
@@ -86,17 +97,18 @@ describe('Node', function() {
         beforeEach(function() {
             myNode.setNeighbor("ct", myCTNeighbor);
             myNode.placeToken(myToken);
-            myCTNeighbor.placeToken(myToken);
         });
 
         describe('getMatchingNeighbors', function() {
             it('retuns an array of neighboring nodes with the same player attribute', function() {
+                myCTNeighbor.placeToken(myToken);
 
                 expect(myNode.getMatchingNeighbors()).toBeArray();
 
             });
 
             it('will return an array containing neighboring matched nodes', function() {
+                myCTNeighbor.placeToken(myToken);
 
                 expect(myNode.getMatchingNeighbors()).toContain(myCTNeighbor);
             });
@@ -104,6 +116,8 @@ describe('Node', function() {
 
         describe('#getComponent', function() {
             it('returns a new component based on the matching neighboring nodes', function() {
+                myCTNeighbor.placeToken(myToken);
+
                 var myComponent = new Component(myNode, myCTNeighbor, "ct");
                 expect(myNode.getComponent(myCTNeighbor, "ct")).toEqual(myComponent);
             });
@@ -111,6 +125,8 @@ describe('Node', function() {
 
         describe('#checkMatch', function() {
             it('ensures that another ndoe has the same player', function() {
+                myCTNeighbor.placeToken(myToken);
+
                 expect(myNode.checkMatch(myCTNeighbor)).toBe(true);
             });
         });
@@ -122,12 +138,26 @@ describe('Node', function() {
             });
         });
 
+
         describe('createPlayerComponent', function() {
             it('passes newly created node to mutual player', function() {
                 var myComponent = myNode.getComponent(myCTNeighbor, "ct");
                 myNode.createPlayerComponent(myComponent);
                 expect(myNode.player.components).toContain(myComponent);
             });
+        });
+    });
+    describe('makeMatchingComponents', function() {
+        it('creates a new component for each matching neighbor', function() {
+            myNode.setNeighbor("ct", myCTNeighbor);
+            myCTNeighbor.placeToken(myToken);
+            myNode.placeToken(myToken);
+
+            var myComponent = myNode.getComponent(myCTNeighbor, "ct");
+
+            myNode.makeMatchingComponents();
+            expect(myNode.player.components).toContain(myComponent);
+
         });
     });
 

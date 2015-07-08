@@ -8,8 +8,8 @@ Player.prototype.hasComponents = function() {
     return this.components.length > 0;
 };
 Player.prototype.getComponent = function(n1, n2, relCode) {
-    console.log(n1);
-    console.log(n2);
+    //console.log(n1);
+    //console.log(n2);
     var tmpComp = new Component(n1, n2, relCode);
 
     return tmpComp;
@@ -25,12 +25,12 @@ Player.prototype.placeToken = function(board, token, colIndex) {
 };
 Player.prototype.hasDirectedComponents = function(newComp) {
     var result;
-    console.log(newComp.direction);
+    //console.log(newComp.direction);
     if (this.hasComponents() == false) {
         result = false
     } else {
         result = this.components.some(function(dComp, id, arr) {
-            console.log(dComp.direction);
+            //console.log(dComp.direction);
             return dComp.direction == newComp.direction;
         }, this);
     };

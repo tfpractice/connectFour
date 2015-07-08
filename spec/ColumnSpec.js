@@ -1,4 +1,4 @@
-describe('Column', function() {
+fdescribe('Column', function() {
     var myColumn, myPlayer, myToken;
     beforeEach(function() {
         myColumn = new Column(1, 6);

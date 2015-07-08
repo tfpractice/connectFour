@@ -1,4 +1,4 @@
-describe('Component', function() {
+fdescribe('Component', function() {
     var n1, n2, n3, n4, n5, relCode, p1, p2, t1, t2, t3, t4, myComponent, my2Component, oComponenet;
     beforeEach(function() {
         n1 = new Node(2, 3);
@@ -89,8 +89,8 @@ describe('Component', function() {
         it('sets the nodes to be the union of the two components', function() {
             myComponent.unionize(my2Component);
             var nodeUnion = myComponent.union(my2Component);
-            console.log(nodeUnion);
-            console.log(myComponent.nodes);
+            //console.log(nodeUnion);
+            //console.log(myComponent.nodes);
             expect(myComponent.nodes).toEqual(nodeUnion);
         });
     });

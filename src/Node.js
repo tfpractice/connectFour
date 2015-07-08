@@ -12,6 +12,11 @@ Node.prototype.placeToken = function(token) {
     this.player = token.player;
     this.token = token;
     this.changeColor(token);
+    if(this.checkMatchingNeighbors() == true){
+    	// return false;
+    	console.log(this.column +"" + this.row +"" + this.getMatchingNeighbors());
+    	this.makeMatchingComponents();
+    };
 };
 Node.prototype.setNeighbor = function(relationCode, nNode) {
     this.neighbors[relationCode] = nNode;
@@ -54,7 +59,7 @@ Node.prototype.getComponent = function(nNode, relationCode) {
             throw new Error("these nodes are not neighbors");
         } else if ((this.checkMatch(nNode) == true) && (this.confirmNeighborStatus(nNode, relationCode) == true)) {
               var tmpComp = new Component(this, nNode, relationCode);
-              this.createPlayerComponent(tmpComp);	
+              // this.createPlayerComponent(tmpComp);	
              return tmpComp;
         }
 
@@ -79,4 +84,15 @@ Node.prototype.checkMatch = function(nNode) {
 
 Node.prototype.createPlayerComponent = function(newComp) {
 	this.player.addComponent(newComp);
+};
+
+Node.prototype.makeMatchingComponents = function() {
+	var matchingKeys = Object.keys(this.neighbors).filter(function(key, id, arr) {
+		return this.checkMatch(this.neighbors[key]) == true;
+	},this);
+
+	matchingKeys.forEach(function(key, id, arr) {
+		var tmpComponent = this.getComponent(this.neighbors[key], key);
+		this.createPlayerComponent(tmpComponent);
+	}, this);
 };

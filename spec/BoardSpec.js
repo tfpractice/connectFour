@@ -1,4 +1,4 @@
-describe('Board', function() {
+fdescribe('Board', function() {
     var myBoard, myPlayer, myToken;
     beforeEach(function() {
         myBoard = new Board(7, 6);
@@ -38,8 +38,8 @@ describe('Board', function() {
 
             var node_2_3 = myBoard.columns[2].nodes[3];
             var node_3_2 = myBoard.columns[3].nodes[2];
-            console.log(node_2_3);
-            console.log(node_3_2);
+            //console.log(node_2_3);
+            //console.log(node_3_2);
             expect(node_2_3.neighbors['rt']).toBe(node_3_2);
 
         });
