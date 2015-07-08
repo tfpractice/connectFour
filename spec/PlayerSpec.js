@@ -39,21 +39,7 @@ describe('Player', function() {
             expect(myBoard.columns[3].freeIndex).toBe(4);
         });
     });
-    // describe('#hasDirectedComponents', function() {
-    //     it('determines if the player has components matching the direction of arg component', function() {
-    //         var t1 = new Token(myPlayer, "#ff00ff");
-    //         var t2 = new Token(myPlayer, "#ff00ff");
-    //         var t3 = new Token(myPlayer, "#ff00ff");
-    //         var n1 = new Node(2, 3);
-    //         var n2 = new Node(3, 2);
-    //         var n3 = new Node(4, 1);
-    //         n1.placeToken(t1);
-    //         n2.placeToken(t2);
-    //         n3.placeToken(t3);
-    //         var myComponent = new Component(n1, n2, "rt");
-    //         var my2Component = new Component(n2, n3, "rt")
-    //     });
-    // });
+
     describe('component comparisons', function() {
         var myComponent, n2n3Component;
         beforeEach(function() {
@@ -92,7 +78,7 @@ describe('Player', function() {
         });
         describe('#hasIntersectingComponents', function() {
             it('determines if any of the matching directed components intersect with the argument component', function() {
-               expect(myPlayer.hasIntersectingComponents(n2n3Component)).toBeTrue(); 
+                expect(myPlayer.hasIntersectingComponents(n2n3Component)).toBeTrue();
             });
         });
         describe('#getIntersectingComponents', function() {
@@ -112,7 +98,7 @@ describe('Player', function() {
                 myPlayer.unionizeComponents(myComponent, n2n3Component);
                 expect(myComponent.arity).toBe(3);
             });
-       
+
         });
 
         describe('evaluateUniqueness', function() {

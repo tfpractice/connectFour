@@ -53,7 +53,9 @@ Node.prototype.getComponent = function(nNode, relationCode) {
         } else if (this.confirmNeighborStatus(nNode, relationCode) == false) {
             throw new Error("these nodes are not neighbors");
         } else if ((this.checkMatch(nNode) == true) && (this.confirmNeighborStatus(nNode, relationCode) == true)) {
-            return new Component(this, nNode, relationCode);
+              var tmpComp = new Component(this, nNode, relationCode);
+              this.createPlayerComponent(tmpComp);	
+             return tmpComp;
         }
 
     } catch (err) {
@@ -73,4 +75,8 @@ Node.prototype.checkMatch = function(nNode) {
     } else if (this.occupied == true) {
         return nNode.player == this.player;
     };
+};
+
+Node.prototype.createPlayerComponent = function(newComp) {
+	this.player.addComponent(newComp);
 };

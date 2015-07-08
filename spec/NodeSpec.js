@@ -121,6 +121,14 @@ describe('Node', function() {
                 expect(myNode.confirmNeighborStatus(myCTNeighbor, "ct")).toBeTrue();
             });
         });
+
+        describe('createPlayerComponent', function() {
+            it('passes newly created node to mutual player', function() {
+                var myComponent = myNode.getComponent(myCTNeighbor, "ct");
+                myNode.createPlayerComponent(myComponent);
+                expect(myNode.player.components).toContain(myComponent);
+            });
+        });
     });
 
 });
