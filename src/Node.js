@@ -8,14 +8,10 @@ function Node(colID, rowID) {
     this.color = "none";
 }
 Node.prototype.placeToken = function(token) {
-    this.occupied = true;
-    this.player = token.player;
-    this.token = token;
+    this.setToken(token);
     this.changeColor(token);
-    if(this.checkMatchingNeighbors() == true){
-    	// return false;
-    	console.log(this.column +"" + this.row +"" + this.getMatchingNeighbors());
-    	this.makeMatchingComponents();
+    if (this.checkMatchingNeighbors() == true) {
+        this.makeMatchingComponents();
     };
 };
 Node.prototype.setNeighbor = function(relationCode, nNode) {
@@ -38,7 +34,6 @@ Node.prototype.checkMatchingNeighbors = function() {
 Node.prototype.getMatchingNeighbors = function() {
     var matchingNeighbors = [];
     if (this.occupied == false) {
-        // matchingNeighbors = [];
     } else if (this.occupied == true) {
         var matchingKeys = Object.keys(this.neighbors).filter(function(key, id, arr) {
             return this.neighbors[key].player == this.player;
@@ -49,50 +44,44 @@ Node.prototype.getMatchingNeighbors = function() {
     };
     return matchingNeighbors;
 };
-
 Node.prototype.getComponent = function(nNode, relationCode) {
-
     try {
         if (this.checkMatch(nNode) == false) {
             throw new Error("nodes do not belong to same player");
         } else if (this.confirmNeighborStatus(nNode, relationCode) == false) {
             throw new Error("these nodes are not neighbors");
         } else if ((this.checkMatch(nNode) == true) && (this.confirmNeighborStatus(nNode, relationCode) == true)) {
-              var tmpComp = new Component(this, nNode, relationCode);
-              // this.createPlayerComponent(tmpComp);	
-             return tmpComp;
+            var tmpComp = new Component(this, nNode, relationCode);
+            return tmpComp;
         }
-
     } catch (err) {
         alert(err.message);
     }
-
-
 };
-
 Node.prototype.confirmNeighborStatus = function(nNode, relationCode) {
     return this.neighbors[relationCode] == nNode;
 };
 Node.prototype.checkMatch = function(nNode) {
-
     if (this.occupied == false) {
         return false;
     } else if (this.occupied == true) {
         return nNode.player == this.player;
     };
 };
-
 Node.prototype.createPlayerComponent = function(newComp) {
-	this.player.addComponent(newComp);
+    this.player.addComponent(newComp);
 };
-
 Node.prototype.makeMatchingComponents = function() {
-	var matchingKeys = Object.keys(this.neighbors).filter(function(key, id, arr) {
-		return this.checkMatch(this.neighbors[key]) == true;
-	},this);
-
-	matchingKeys.forEach(function(key, id, arr) {
-		var tmpComponent = this.getComponent(this.neighbors[key], key);
-		this.createPlayerComponent(tmpComponent);
-	}, this);
+    var matchingKeys = Object.keys(this.neighbors).filter(function(key, id, arr) {
+        return this.checkMatch(this.neighbors[key]) == true;
+    }, this);
+    matchingKeys.forEach(function(key, id, arr) {
+        var tmpComponent = this.getComponent(this.neighbors[key], key);
+        this.createPlayerComponent(tmpComponent);
+    }, this);
+};
+Node.prototype.setToken = function(token) {
+    this.token = token;
+    this.occupied = true;
+    this.player = token.player;
 };

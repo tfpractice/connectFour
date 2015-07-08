@@ -6,16 +6,10 @@ describe('Player', function() {
         t1 = new Token(myPlayer, "#ff00ff");
         t2 = new Token(myPlayer, "#ff00ff");
         t3 = new Token(myPlayer, "#ff00ff");
-        // var n1 = new Node(2, 3);
-        // var n2 = new Node(3, 2);
-        // var n3 = new Node(4, 1);
         n1 = myBoard.columns[2].nodes[3];
         n2 = myBoard.columns[3].nodes[2];
         n3 = myBoard.columns[4].nodes[1];
-        n1.setNeighbor("rt", n2);
-        n2.setNeighbor("lb", n1);
-        n1.placeToken(t1);
-        n2.placeToken(t2);
+       
     });
     describe('init', function() {
         it('initializes with a name', function() {
@@ -39,19 +33,15 @@ describe('Player', function() {
             expect(myBoard.columns[3].freeIndex).toBe(4);
         });
     });
-
     describe('component comparisons', function() {
         var myComponent, n2n3Component;
         beforeEach(function() {
             myComponent = new Component(n1, n2, "rt");
-            //console.log(myComponent);
             n2n3Component = new Component(n2, n3, "rt");
             myPlayer.addComponent(myComponent);
-
         });
         describe('#getComponent', function() {
             it('returns a new component based on the given nodes and neighborRelation', function() {
-
                 var resultComponent = myPlayer.getComponent(n1, n2, "rt");
                 expect(resultComponent).toEqual(myComponent);
             });
@@ -86,32 +76,26 @@ describe('Player', function() {
                 expect(myPlayer.getIntersectingComponents(n2n3Component)).toContain(myComponent);
             });
         });
-
         describe('#getOriginalArrayComponent', function() {
             it('takes a component from a modified array and returns the original component', function() {
                 expect(myPlayer.getOriginalArrayComponent(myComponent)).toBe(myComponent);
             });
         });
-
         describe('unionizeComponents', function() {
             it('adds nodes from an intersecting component to an already existing component', function() {
                 myPlayer.unionizeComponents(myComponent, n2n3Component);
                 expect(myComponent.arity).toBe(3);
             });
-
         });
-
         describe('evaluateUniqueness', function() {
             it('determines if a component warrants a unique entry in the components array ', function() {
                 expect(myPlayer.evaluateUniqueness(n2n3Component)).toBeFalse();
             });
         });
-
         describe('aritySort', function() {
             it('sorts connected components by arity', function() {
                 
             });
         });
-
     });
 });

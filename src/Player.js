@@ -11,14 +11,11 @@ Player.prototype.getComponent = function(n1, n2, relCode) {
     //console.log(n1);
     //console.log(n2);
     var tmpComp = new Component(n1, n2, relCode);
-
     return tmpComp;
 };
 Player.prototype.placeToken = function(board, token, colIndex) {
     try {
-
         board.placeToken(token, colIndex);
-
     } catch (err) {
         alert
     }
@@ -34,10 +31,8 @@ Player.prototype.hasDirectedComponents = function(newComp) {
             return dComp.direction == newComp.direction;
         }, this);
     };
-
     return result;
 };
-
 Player.prototype.addComponent = function(newComp) {
     if (this.evaluateUniqueness(newComp) == true) {
         this.components.push(newComp);
@@ -47,11 +42,8 @@ Player.prototype.addComponent = function(newComp) {
             var oIComp = this.getOriginalArrayComponent(iComp);
             this.unionizeComponents(oIComp, newComp);
         }, this);
-
     };
-
 };
-
 Player.prototype.getDirectedComponents = function(newComp) {
     if (this.hasDirectedComponents(newComp) == true) {
         return this.components.filter(function(dComp) {
@@ -59,7 +51,6 @@ Player.prototype.getDirectedComponents = function(newComp) {
         });
     };
 };
-
 Player.prototype.hasIntersectingComponents = function(newComp) {
     var result;
     if (this.hasDirectedComponents(newComp) == false) {
@@ -68,13 +59,10 @@ Player.prototype.hasIntersectingComponents = function(newComp) {
         var matchingComponents = this.getDirectedComponents(newComp);
         result = matchingComponents.some(function(dComp, id, arr) {
             return dComp.intersects(newComp) == true;
-
         }, this);
     };
-
     return result;
 };
-
 Player.prototype.getIntersectingComponents = function(newComp) {
     var result;
     if (this.hasDirectedComponents(newComp) == true) {
@@ -86,20 +74,16 @@ Player.prototype.getIntersectingComponents = function(newComp) {
         result = [];
     };
     return result;
-
 };
-
 Player.prototype.getOriginalArrayComponent = function(newComp) {
     var oIndex = this.components.indexOf(newComp);
     if (oIndex > -1) {
         return this.components[oIndex];
     };
 };
-
 Player.prototype.unionizeComponents = function(oComp, newComp) {
     oComp.unionize(newComp);
 };
-
 Player.prototype.evaluateUniqueness = function(newComp) {
     var result;
     if (this.hasComponents() == false) {

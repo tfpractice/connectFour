@@ -1,4 +1,4 @@
-fdescribe('Board', function() {
+describe('Board', function() {
     var myBoard, myPlayer, myToken;
     beforeEach(function() {
         myBoard = new Board(7, 6);

@@ -1,4 +1,4 @@
-fdescribe('Component', function() {
+describe('Component', function() {
     var n1, n2, n3, n4, n5, relCode, p1, p2, t1, t2, t3, t4, myComponent, my2Component, oComponenet;
     beforeEach(function() {
         n1 = new Node(2, 3);
