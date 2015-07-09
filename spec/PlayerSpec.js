@@ -9,7 +9,6 @@ describe('Player', function() {
         n1 = myBoard.columns[2].nodes[3];
         n2 = myBoard.columns[3].nodes[2];
         n3 = myBoard.columns[4].nodes[1];
-       
     });
     describe('init', function() {
         it('initializes with a name', function() {
@@ -93,8 +92,35 @@ describe('Player', function() {
             });
         });
         describe('aritySort', function() {
-            it('sorts connected components by arity', function() {
-                
+            it('sorts connected components by arity and reverses it', function() {
+                var n23 = myBoard.columns[2].nodes[3];
+                var n33 = myBoard.columns[3].nodes[3];
+                var n43 = myBoard.columns[4].nodes[3];
+                var t23 = new Token(myPlayer, "#ff0000");
+                var t33 = new Token(myPlayer, "#ff0000");
+                var t43 = new Token(myPlayer, "#ff0000");
+                n23.placeToken(t23);
+                n33.placeToken(t33);
+                n43.placeToken(t43);
+                myPlayer.aritySort();
+                console.log(myBoard);
+                expect(myPlayer.components[0].arity).toBe(3);
+
+
+            });
+        });
+        describe('addToken', function() {
+            it('adds a token to the players token array', function() {
+                var tmpToken = new Token(myPlayer, "#ff0000");
+                myPlayer.addToken(tmpToken);
+                expect(myPlayer.tokenIndex).toBe(0);
+            });
+        });
+        describe('getNextToken', function() {
+            it('returns the next available token', function() {
+                var tmpToken = new Token(myPlayer, "#ff0000");
+                myPlayer.addToken(tmpToken);
+                expect(myPlayer.getNextToken()).toBe(tmpToken);
             });
         });
     });

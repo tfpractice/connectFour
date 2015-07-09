@@ -3,6 +3,7 @@ function Column(index, nodeCount) {
     this.nodeCount = nodeCount;
     this.nodes = [];
     this.initializeNodes();
+    this.setVerticalNeighbors();
     this.freeIndex = this.nodeCount - 1;
 
 }

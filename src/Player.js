@@ -1,6 +1,7 @@
 function Player(name) {
     this.name = name;
     this.tokens = [];
+    this.tokenIndex = null;
     this.components = [];
     this.wins = 0;
 }
@@ -8,8 +9,7 @@ Player.prototype.hasComponents = function() {
     return this.components.length > 0;
 };
 Player.prototype.getComponent = function(n1, n2, relCode) {
-    //console.log(n1);
-    //console.log(n2);
+
     var tmpComp = new Component(n1, n2, relCode);
     return tmpComp;
 };
@@ -22,12 +22,10 @@ Player.prototype.placeToken = function(board, token, colIndex) {
 };
 Player.prototype.hasDirectedComponents = function(newComp) {
     var result;
-    //console.log(newComp.direction);
     if (this.hasComponents() == false) {
         result = false
     } else {
         result = this.components.some(function(dComp, id, arr) {
-            //console.log(dComp.direction);
             return dComp.direction == newComp.direction;
         }, this);
     };
@@ -96,4 +94,26 @@ Player.prototype.evaluateUniqueness = function(newComp) {
         result = false;
     };
     return result;
+};
+Player.prototype.getNextToken = function() {
+    return this.tokens[this.tokenIndex];
+};
+Player.prototype.addToken = function(token) {
+    this.tokens.push(token);
+    this.tokenIndex = this.tokens.length -1;
+};
+
+Player.prototype.aritySort = function() {
+    var iVal, tmpComp, compCount = this.components.length;
+    for (var oVal = 0; oVal < compCount; oVal++) {
+        tmpComp = this.components[oVal];
+        iVal = oVal;
+        while ((iVal > 0) && (this.components[iVal - 1].arity >= tmpComp.arity)) {
+            this.components[iVal] = this.components[iVal - 1];
+            --iVal;
+        }
+        this.components[iVal] = tmpComp;
+
+    }; this.components.reverse();
+    console.log(this.components);
 };

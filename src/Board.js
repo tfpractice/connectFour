@@ -3,17 +3,16 @@ function Board(colCount, rowCount) {
     this.rowCount = rowCount;
     this.columns = [];
     this.initColumns();
+    this.currentColIndex = 0;
     this.setHNeighbors();
     this.setPDNeighbors();
     this.setNDNeighbors();
 }
-
 Board.prototype.initColumns = function() {
     for (var i = 0; i < this.colCount; i++) {
         this.columns[i] = new Column(i, this.rowCount);
     };
 };
-
 Board.prototype.setHNeighbors = function() {
     for (var i = 0; i < this.colCount - 1; i++) {
         var currCol = this.columns[i];
@@ -26,7 +25,6 @@ Board.prototype.setHNeighbors = function() {
         };
     };
 };
-
 Board.prototype.setPDNeighbors = function() {
     for (var i = 0; i < this.colCount - 1; i++) {
         var currCol = this.columns[i];
@@ -39,7 +37,6 @@ Board.prototype.setPDNeighbors = function() {
         };
     };
 };
-
 Board.prototype.setNDNeighbors = function() {
     for (var i = this.colCount - 1; i > 0; i--) {
         var currCol = this.columns[i];
@@ -52,20 +49,17 @@ Board.prototype.setNDNeighbors = function() {
         };
     };
 };
-
 Board.prototype.placeToken = function(token, colIndex) {
     var currCol = this.columns[colIndex];
     try {
         if (currCol.isAvailable() == false) {
-        	
             throw new Error("column not free, please select another");
-            
         } else {
+            this.currentColIndex = colIndex;
             currCol.placeToken(token);
             return true;
         }
-
-    } catch(e) {
+    } catch (e) {
         alert(e.message);
         return false;
     }
