@@ -81,7 +81,6 @@ describe('Game', function() {
                 p1Index = 2;
                 p2Index = 3;
                 for (var i = 0; i < 7; i++) {
-
                     if ((i % 2) == 0) {
                         myGame.selectColumn(p1Index);
                         myGame.playToken();
@@ -101,15 +100,43 @@ describe('Game', function() {
             });
         });
     });
+    describe('#visualize', function() {
+        beforeEach(function() {
+            myGame.visualize();
+        });
 
+        it('appends an SVG element with class gameVis to DOM', function() {
+            expect(myGame.visualization).toEqual(d3.select('.gameVis'));
+        });
+        it('appends an svg elemnt (".playerVis") per player', function() {
+            var playerVis = $(".playerVis");
+
+
+            expect(playerVis.length).toBe(2);
+        });
+        it('appends a #gameBoard svg to the dom', function() {
+            var gB = $('#gameBoard');
+            expect(gB).not.toBeEmptyArray();
+        });
+        it('appends a .columnVis svg to the dom based on the board attribute', function() {
+            var columns = $('.columnVis');
+            expect(columns.length).toBe(7);
+        });
+        it('appends six nodes to each column', function() {
+            var nodes = $('.nodeVis');
+            expect(nodes.length).toBe(42);
+        });
+        it('appends a .nodeToken placeHolder onto every node', function() {
+            var nTokens = $('.nodeToken');
+            expect(nTokens.length).toBe(42);
+        });
+    });
     describe('jasmine-jquery trial', function() {
         var elem;
         beforeEach(function() {
             elem = $('<div id="trialDiv"></div>');
         });
-
         it('appends a div with id trialDiv to DOM', function() {
-            console.log(elem);
             expect(elem).toHaveId('trialDiv');
         });
     });

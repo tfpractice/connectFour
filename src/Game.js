@@ -1,6 +1,7 @@
  function Game(p1, p2) {
      this.player1 = p1;
      this.player2 = p2;
+     this.players = [this.player1, this.player2];
      this.board = new Board(7, 6);
      this.distributeTokens();
      this.currentPlayer = this.player1;
@@ -40,4 +41,41 @@
  Game.prototype.getToken = function() {
      var tmpToken = this.currentPlayer.getNextToken();
      return tmpToken;
+ };
+
+ Game.prototype.visualize = function() {
+     d3.selectAll('svg').remove();
+
+     this.visualization = d3.select('body').append('svg').classed("gameVis", true);
+     var playerVis = this.visualization.selectAll(".playerVis").data(this.players).enter()
+         .append('svg').classed("playerVis", true)
+         .attr('id', function(p, i) {
+             return "p" + (i + 1) + "Vis";
+         });
+     console.log(playerVis);
+
+     var board = this.visualization.selectAll('#gameBoard').data([this.board])
+         .enter().append('svg').attr('id', 'gameBoard');
+     // classed("gameBoard", true);
+     // ?
+     console.log(board);
+
+
+     var columns = board.selectAll(".columnVis").data(function(d) {
+             return d.columns;
+         })
+         .enter().append('svg').classed("columnVis", true).attr('id', function(c) {
+             return "column" + c.index;
+         });
+     console.log(columns);
+
+     var nodes = columns.selectAll(".nodeVis").data(function(c) {
+         return c.nodes;
+     }).enter().append('svg').classed("nodeVis", true).attr('id', function(n) {
+         return "node" + n.column + n.row + ""
+     });
+
+     console.log(nodes);
+     var nodeTokens = nodes.append('svg').classed("nodeToken", true);
+     console.log(nodeTokens);
  };
