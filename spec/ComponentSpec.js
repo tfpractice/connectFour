@@ -89,9 +89,8 @@ describe('Component', function() {
         it('sets the nodes to be the union of the two components', function() {
             myComponent.unionize(my2Component);
             var nodeUnion = myComponent.union(my2Component);
-            //console.log(nodeUnion);
-            //console.log(myComponent.nodes);
-            expect(myComponent.nodes).toEqual(nodeUnion);
+
+           expect(myComponent.nodes).toEqual(nodeUnion);
         });
     });
     describe('checkDirection', function() {
