@@ -32,9 +32,15 @@ Game.prototype.selectColumn = function(colIndex) {
 Game.prototype.playToken = function() {
     var currToken = this.getToken();
     var success = this.board.placeToken(currToken, this.currentColIndex);
+
     if (success == true) {
-        this.switchPlayer();
-    }; 
+        if (this.currentPlayer.checkWin() == true) {
+            var winArray = this.currentPlayer.getWinningComponents();
+            alert(this.currentPlayer.name + "  HAS WON THE CURRENT GAME VIA THESE COMPONENTS" + winArray.toString());
+        } else {
+            this.switchPlayer();
+        };
+    };
     // else {};
 
 };

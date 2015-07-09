@@ -17,7 +17,7 @@ Player.prototype.placeToken = function(board, token, colIndex) {
     try {
         board.placeToken(token, colIndex);
     } catch (err) {
-        alert
+        alert(err.message);
     }
 };
 Player.prototype.hasDirectedComponents = function(newComp) {
@@ -41,6 +41,14 @@ Player.prototype.addComponent = function(newComp) {
             this.unionizeComponents(oIComp, newComp);
         }, this);
     };
+
+    this.aritySort();
+    // this.getWinningComponents();
+    // var winning = this.checkWin();
+    // if (winning == true) {
+        // //console.log(this.name + " Has won the current game");
+    // };
+
 };
 Player.prototype.getDirectedComponents = function(newComp) {
     if (this.hasDirectedComponents(newComp) == true) {
@@ -100,7 +108,7 @@ Player.prototype.getNextToken = function() {
 };
 Player.prototype.addToken = function(token) {
     this.tokens.push(token);
-    this.tokenIndex = this.tokens.length -1;
+    this.tokenIndex = this.tokens.length - 1;
 };
 
 Player.prototype.aritySort = function() {
@@ -114,6 +122,22 @@ Player.prototype.aritySort = function() {
         }
         this.components[iVal] = tmpComp;
 
-    }; this.components.reverse();
-    console.log(this.components);
+    };
+    this.components.reverse();
+    //console.log(this.components);
+};
+
+Player.prototype.checkWin = function() {
+    var result = this.components.some(function(comp, index, arr) {
+        return comp.arity > 3;
+    }, this);
+     return result;
+
+};
+Player.prototype.getWinningComponents = function() {
+    if (this.checkWin() == true) {
+        return this.components.filter(function(comp, id, arr) {
+            return comp.arity > 3;
+        }, this);
+    };
 };

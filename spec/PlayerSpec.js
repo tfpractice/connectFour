@@ -109,6 +109,52 @@ describe('Player', function() {
 
             });
         });
+
+        describe('#checkWin', function() {
+            it('retuns false if there are no arity-4 components', function() {
+                expect(myPlayer.checkWin()).toBeFalse();
+            });
+
+            it('returns true if any component has an arity over 3', function() {
+                var n13 = myBoard.columns[1].nodes[3];
+                var n23 = myBoard.columns[2].nodes[3];
+                var n33 = myBoard.columns[3].nodes[3];
+                var n43 = myBoard.columns[4].nodes[3];
+                var t13 = new Token(myPlayer, "#ff0000");
+                var t23 = new Token(myPlayer, "#ff0000");
+                var t33 = new Token(myPlayer, "#ff0000");
+                var t43 = new Token(myPlayer, "#ff0000");
+                n13.placeToken(t13);
+                n23.placeToken(t23);
+                n33.placeToken(t33);
+                n43.placeToken(t43);
+
+                expect(myPlayer.checkWin()).toBeTrue();
+            });
+        });
+
+        describe('getWinningComponents', function() {
+            it('retuns the winning components', function() {
+                var n13 = myBoard.columns[1].nodes[3];
+                var n23 = myBoard.columns[2].nodes[3];
+                var n33 = myBoard.columns[3].nodes[3];
+                var n43 = myBoard.columns[4].nodes[3];
+                var t13 = new Token(myPlayer, "#ff0000");
+                var t23 = new Token(myPlayer, "#ff0000");
+                var t33 = new Token(myPlayer, "#ff0000");
+                var t43 = new Token(myPlayer, "#ff0000");
+                n13.placeToken(t13);
+                n23.placeToken(t23);
+                n33.placeToken(t33);
+                n43.placeToken(t43);
+
+                expect(myPlayer.getWinningComponents()).not.toBeEmptyArray();
+
+
+            });
+        });
+
+
         describe('addToken', function() {
             it('adds a token to the players token array', function() {
                 var tmpToken = new Token(myPlayer, "#ff0000");
