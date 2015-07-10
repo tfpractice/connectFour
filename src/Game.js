@@ -7,7 +7,6 @@
      this.currentPlayer = this.player1;
      this.currentColIndex = this.board.currentColIndex;
  }
-
  Game.prototype.switchPlayer = function() {
      this.currentPlayer = (this.currentPlayer == this.player1) ? this.player2 : this.player1;
  };
@@ -36,46 +35,38 @@
              this.switchPlayer();
          };
      };
-
  };
  Game.prototype.getToken = function() {
      var tmpToken = this.currentPlayer.getNextToken();
      return tmpToken;
  };
-
  Game.prototype.visualize = function() {
      d3.selectAll('svg').remove();
-
      this.visualization = d3.select('body').append('svg').classed("gameVis", true);
      var playerVis = this.visualization.selectAll(".playerVis").data(this.players).enter()
          .append('svg').classed("playerVis", true)
          .attr('id', function(p, i) {
              return "p" + (i + 1) + "Vis";
          });
-     console.log(playerVis);
-
      var board = this.visualization.selectAll('#gameBoard').data([this.board])
          .enter().append('svg').attr('id', 'gameBoard');
-     // classed("gameBoard", true);
-     // ?
-     console.log(board);
-
-
      var columns = board.selectAll(".columnVis").data(function(d) {
              return d.columns;
          })
          .enter().append('svg').classed("columnVis", true).attr('id', function(c) {
              return "column" + c.index;
-         });
-     console.log(columns);
-
+         }).attr('fill', 'blue');
+     columns.on("click", function(c) {
+         d3.select(this).attr('fill', 'red')
+             .append('h1')
+             .text("I HAVE BEEN CLICKED");
+         alert(c.index + "hasBeenClicked");
+         
+     });
      var nodes = columns.selectAll(".nodeVis").data(function(c) {
          return c.nodes;
      }).enter().append('svg').classed("nodeVis", true).attr('id', function(n) {
          return "node" + n.column + n.row + ""
      });
-
-     console.log(nodes);
      var nodeTokens = nodes.append('svg').classed("nodeToken", true);
-     console.log(nodeTokens);
  };

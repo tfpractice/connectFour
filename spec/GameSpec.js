@@ -104,14 +104,11 @@ describe('Game', function() {
         beforeEach(function() {
             myGame.visualize();
         });
-
         it('appends an SVG element with class gameVis to DOM', function() {
             expect(myGame.visualization).toEqual(d3.select('.gameVis'));
         });
         it('appends an svg elemnt (".playerVis") per player', function() {
             var playerVis = $(".playerVis");
-
-
             expect(playerVis.length).toBe(2);
         });
         it('appends a #gameBoard svg to the dom', function() {
@@ -129,6 +126,26 @@ describe('Game', function() {
         it('appends a .nodeToken placeHolder onto every node', function() {
             var nTokens = $('.nodeToken');
             expect(nTokens.length).toBe(42);
+        });
+        describe('DomEvents', function() {
+            var colClickSpy, colHoverSpy, nodeTokenSpy;
+            beforeEach(function() {
+                colHoverSpy = spyOnEvent('columnVis', 'hover');
+            });
+            describe('columnVis click', function() {
+                it('triggers a click event on .columnVis', function() {
+                    $('.columnVis').click();
+                });
+                it('should behave...', function() {
+                    colClickSpy = spyOnEvent('#column2', 'click');
+                    $("#column2").click(function(e) {
+                       d3.select(this).attr('fill', 'red').append('h1').text(function(c){return c.index; }); // body...
+                    });
+                    $("#column2").click();
+                    $('#column2').trigger('click');
+                    expect("click").toHaveBeenTriggeredOn($("#column2"));
+                });
+            });
         });
     });
     describe('jasmine-jquery trial', function() {
