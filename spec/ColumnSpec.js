@@ -17,6 +17,9 @@ describe('Column', function() {
             expect(myColumn.nodes).toBeArray();
         });
         it('initializes with domElement', function() {
+            $("#column1").trigger('click');
+            console.log($("#column1"));
+            console.log((myColumn.domElement));
             expect(myColumn.domElement).toBeTruthy();
         });
     });

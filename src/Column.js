@@ -6,7 +6,13 @@ function Column(index, nodeCount) {
     this.setVerticalNeighbors();
     this.freeIndex = this.nodeCount - 1;
     this.domElement = d3.select(document.createElementNS(d3.ns.prefix.svg, 'g')).node();
-    console.log(this.domElement);
+    // this.domElement.on('click', function(d) {
+    //     d3.select(this);
+    //     console.log(this.domElement);
+
+    //     /* Act on the event */
+    // });
+    // $(this.domElement).trigger('click');
 
 }
 

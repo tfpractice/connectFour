@@ -105,7 +105,10 @@ describe('Game', function() {
             myGame.visualize();
         });
         it('appends an SVG element with class gameVis to DOM', function() {
-            expect(myGame.visualization).toEqual(d3.select('.gameVis'));
+            console.log($(myGame.visualization));
+            console.log(d3.selectAll(".gameVis"));
+            expect((myGame.visualization)).toBeInDOM("gameVis");
+            // expect(myGame.visualization).toEqual(d3.select('.gameVis'));
         });
         it('appends an svg elemnt (".playerVis") per player', function() {
             var playerVis = $(".playerVis");

@@ -6,6 +6,8 @@
      this.distributeTokens();
      this.currentPlayer = this.player1;
      this.currentColIndex = this.board.currentColIndex;
+     this.visualization = d3.select(document.createElementNS(d3.ns.prefix.svg, 'svg')).node();
+     console.log(this.visualization);
  }
  Game.prototype.switchPlayer = function() {
      this.currentPlayer = (this.currentPlayer == this.player1) ? this.player2 : this.player1;
@@ -42,32 +44,62 @@
  };
  Game.prototype.visualize = function() {
      d3.selectAll('svg').remove();
-     this.visualization = d3.select('body').append('svg').classed("gameVis", true);
-     var playerVis = this.visualization.selectAll(".playerVis").data(this.players).enter()
-         .append('svg').classed("playerVis", true)
+     var gVis = d3.select('body').selectAll('.gameVis')
+         .data([this]).enter().append(function(g) {
+             return g.visualization;
+             // body...
+         })
+         .classed("gameVis", true);
+
+     console.log(gVis);
+     var playerVis = gVis.selectAll(".playerVis")
+         .data(function(g) {
+             return g.players;
+         })
+         .enter()
+         .append('svg')
+         .classed("playerVis", true)
          .attr('id', function(p, i) {
              return "p" + (i + 1) + "Vis";
          });
-     var board = this.visualization.selectAll('#gameBoard').data([this.board])
-         .enter().append('svg').attr('id', 'gameBoard');
-     var columns = board.selectAll(".columnVis").data(function(d) {
+     var board = gVis.selectAll('#gameBoard')
+         .data([this.board])
+         .enter()
+         .append('svg')
+         .attr('id', 'gameBoard');
+     var columns = board.selectAll(".columnVis")
+         .data(function(d) {
              return d.columns;
          })
-         .enter().append(function(c){return c.domElement;}).classed("columnVis", true).attr('id', function(c) {
+         .enter()
+         .append(function(c) {
+             return c.domElement;
+         }).classed("columnVis", true)
+         .attr('id', function(c) {
              return "column" + c.index;
-         }).attr('fill', 'blue');
+         })
+         .attr('fill', 'blue');
      columns.on("click", function(c) {
+         console.log(c.domElement);
          d3.select(this).attr('fill', 'red')
              .append('h1')
              .text("I HAVE BEEN CLICKED");
          alert(c.index + "hasBeenClicked");
-         
+
      });
+     $("#column2").trigger('click');
      console.log($(".columnVis"));
-     var nodes = columns.selectAll(".nodeVis").data(function(c) {
-         return c.nodes;
-     }).enter().append(function(n){return n.domElement;}).classed("nodeVis", true).attr('id', function(n) {
-         return "node" + n.column + n.row + ""
-     });
-     var nodeTokens = nodes.append('svg').classed("nodeToken", true);
+     var nodes = columns.selectAll(".nodeVis")
+         .data(function(c) {
+             return c.nodes;
+         })
+         .enter()
+         .append(function(n) {
+             return n.domElement;
+         })
+         .classed("nodeVis", true).attr('id', function(n) {
+             return "node" + n.column + n.row + ""
+         });
+     var nodeTokens = nodes.append('svg')
+         .classed("nodeToken", true);
  };
