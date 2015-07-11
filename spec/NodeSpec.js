@@ -30,6 +30,11 @@ describe('Node', function() {
         it('initializes with no color ', function() {
             expect(myNode.color).toEqual("none");
         });
+        it('initializes with a svg domElement', function() {
+            console.log(myNode.domElement);
+            expect(myNode.domElement).toBeTruthy();
+
+        });
     });
     describe('#setToken', function() {
         beforeEach(function() {
@@ -89,7 +94,7 @@ describe('Node', function() {
                 var cbComp = myCBNeighbor.getComponent(myNode, "ct");
                 var uComp = myComponent.unionize(cbComp);
                 expect(myNode.player.components).toContain(uComp);
-                
+
             });
         });
     });

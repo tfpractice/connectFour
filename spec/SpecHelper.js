@@ -1,4 +1,5 @@
 beforeEach(function () {
+  window.alert = function(){return;};
   jasmine.addMatchers({
     toBePlaying: function () {
       return {

@@ -5,6 +5,8 @@ function Column(index, nodeCount) {
     this.initializeNodes();
     this.setVerticalNeighbors();
     this.freeIndex = this.nodeCount - 1;
+    this.domElement = d3.select(document.createElementNS(d3.ns.prefix.svg, 'g')).node();
+    console.log(this.domElement);
 
 }
 

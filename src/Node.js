@@ -6,6 +6,9 @@ function Node(colID, rowID) {
     this.neighbors = {};
     this.token = null;
     this.color = "none";
+    this.domElement = d3.select(document.createElementNS(d3.ns.prefix.svg, 'g')).node();
+    // this.domElement = document.createElementNS(d3.ns.prefix.svg, 'g');
+    // this.domSelector = "#node"+this.column+""+this.row;// console.log(this.domElement.node());
 }
 Node.prototype.placeToken = function(token) {
     this.setToken(token);

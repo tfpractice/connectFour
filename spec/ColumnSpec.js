@@ -16,6 +16,9 @@ describe('Column', function() {
         it('initializes with a nodes array', function() {
             expect(myColumn.nodes).toBeArray();
         });
+        it('initializes with domElement', function() {
+            expect(myColumn.domElement).toBeTruthy();
+        });
     });
     describe('#addNode', function() {
         it('appends a node to the nodes array', function() {

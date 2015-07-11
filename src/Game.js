@@ -53,7 +53,7 @@
      var columns = board.selectAll(".columnVis").data(function(d) {
              return d.columns;
          })
-         .enter().append('svg').classed("columnVis", true).attr('id', function(c) {
+         .enter().append(function(c){return c.domElement;}).classed("columnVis", true).attr('id', function(c) {
              return "column" + c.index;
          }).attr('fill', 'blue');
      columns.on("click", function(c) {
@@ -63,9 +63,10 @@
          alert(c.index + "hasBeenClicked");
          
      });
+     console.log($(".columnVis"));
      var nodes = columns.selectAll(".nodeVis").data(function(c) {
          return c.nodes;
-     }).enter().append('svg').classed("nodeVis", true).attr('id', function(n) {
+     }).enter().append(function(n){return n.domElement;}).classed("nodeVis", true).attr('id', function(n) {
          return "node" + n.column + n.row + ""
      });
      var nodeTokens = nodes.append('svg').classed("nodeToken", true);

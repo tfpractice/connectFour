@@ -127,23 +127,50 @@ describe('Game', function() {
             var nTokens = $('.nodeToken');
             expect(nTokens.length).toBe(42);
         });
-        describe('DomEvents', function() {
-            var colClickSpy, colHoverSpy, nodeTokenSpy;
+        describe('D3js DomEvents cannot be tested internally spies dont have callThrough', function() {
+            var col2ClickSpy, col1HoverSpy, nodeTokenSpy;
             beforeEach(function() {
-                colHoverSpy = spyOnEvent('columnVis', 'hover');
+                col1HoverSpy = spyOnEvent('#column1', 'hover');
+                col2ClickSpy = spyOnEvent('#column2', 'click');
+
             });
             describe('columnVis click', function() {
-                it('triggers a click event on .columnVis', function() {
-                    $('.columnVis').click();
+                it('triggers a click event on #column2', function() {
+                    $('#column2').click();
+                    expect(col2ClickSpy).toHaveBeenTriggered();
                 });
-                it('should behave...', function() {
-                    colClickSpy = spyOnEvent('#column2', 'click');
-                    $("#column2").click(function(e) {
-                       d3.select(this).attr('fill', 'red').append('h1').text(function(c){return c.index; }); // body...
+
+                it('triggers an attribute change in the d3Selection', function() {
+                    $("#column2").click(function(d) {
+                        d3.select(this).attr('fill', '#ff0000').append('h1').text(function(c) {
+                            return c.index;
+                        }); // body...
+                        // console.log(d);
                     });
                     $("#column2").click();
                     $('#column2').trigger('click');
-                    expect("click").toHaveBeenTriggeredOn($("#column2"));
+                    var colStyle = $("#column2").css("fill");
+                    expect(colStyle).toEqual('rgb(255, 0, 0)');
+                });
+            });
+            describe('columnVis hover', function() {
+                it('selects the currently hovered column (#column1)', function() {
+                    
+                    $("#column1").on('hover', function(e) {
+                         var d3Event = function(e){
+                            d3.select(this).on('hover', function(d) {
+                            console.log(d.index);
+                            /* Act on the event */
+                        })
+                        };
+                        // 
+                        return d3Event();
+                        console.log(d3Event);
+                        /* Act on the event */
+                    });
+                    $("#column1").hover();
+                    $("#column1").trigger('hover');
+                    expect(col1HoverSpy).toHaveBeenTriggered();
                 });
             });
         });
