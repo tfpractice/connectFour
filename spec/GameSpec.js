@@ -54,7 +54,9 @@ describe('Game', function() {
     });
     describe('getToken', function() {
         it('returns the currentPlayers next available token', function() {
-            var currToken = myGame.currentPlayer.tokens[0];
+            
+            var currLength = myGame.currentPlayer.tokens.length;
+            var currToken = myGame.currentPlayer.tokens[currLength -1];
             expect(myGame.getToken()).toEqual(currToken);
         });
     });
@@ -108,7 +110,6 @@ describe('Game', function() {
             console.log($(myGame.visualization));
             console.log(d3.selectAll(".gameVis"));
             expect((myGame.visualization)).toBeInDOM("gameVis");
-            // expect(myGame.visualization).toEqual(d3.select('.gameVis'));
         });
         it('appends an svg elemnt (".playerVis") per player', function() {
             var playerVis = $(".playerVis");

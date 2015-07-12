@@ -15,6 +15,9 @@ describe('Board', function() {
         it('initializes with a currentColIndex', function() {
             expect(myBoard.currentColIndex).toBe(0);
         });
+        it('initializes with an svg domElement', function() {
+            expect(myBoard.domElement).toBeTruthy();
+        });
     });
     describe('createColumns', function() {
         it('establishes the columns based on the colCount and rowCount params', function() {

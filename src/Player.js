@@ -4,6 +4,7 @@ function Player(name) {
     this.tokenIndex = null;
     this.components = [];
     this.wins = 0;
+    this.domElement = d3.select(document.createElementNS(d3.ns.prefix.svg, 'svg')).node();
 }
 Player.prototype.hasComponents = function() {
     return this.components.length > 0;
@@ -46,7 +47,7 @@ Player.prototype.addComponent = function(newComp) {
     // this.getWinningComponents();
     // var winning = this.checkWin();
     // if (winning == true) {
-        // //console.log(this.name + " Has won the current game");
+    // //console.log(this.name + " Has won the current game");
     // };
 
 };
@@ -104,7 +105,11 @@ Player.prototype.evaluateUniqueness = function(newComp) {
     return result;
 };
 Player.prototype.getNextToken = function() {
-    return this.tokens[this.tokenIndex];
+    if (this.tokens.length > 0) {
+        var currToken = this.tokens[this.tokenIndex];
+        this.tokenIndex--;
+        return currToken;
+    };
 };
 Player.prototype.addToken = function(token) {
     this.tokens.push(token);
@@ -131,7 +136,7 @@ Player.prototype.checkWin = function() {
     var result = this.components.some(function(comp, index, arr) {
         return comp.arity > 3;
     }, this);
-     return result;
+    return result;
 
 };
 Player.prototype.getWinningComponents = function() {

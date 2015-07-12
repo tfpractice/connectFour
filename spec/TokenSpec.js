@@ -12,5 +12,8 @@ describe('Token', function() {
         it('instantiaties with a Player', function() {
             expect(p1Token.player).toEqual(p1);
         });
+         it('initializes with an svg domElement', function() {
+            expect(myToken.domElement).toBeTruthy();
+        });
     });
 });

@@ -20,6 +20,9 @@ describe('Player', function() {
         it('initializes with an empty components array', function() {
             expect(myPlayer.components).toEqual([]);
         });
+        it('initializes with an svg domElement', function() {
+            expect(myPlayer.domElement).toBeTruthy();
+        });
     });
     describe('#hasComponents', function() {
         it('determines if the player has any components', function() {

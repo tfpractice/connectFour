@@ -7,6 +7,7 @@ function Board(colCount, rowCount) {
     this.setHNeighbors();
     this.setPDNeighbors();
     this.setNDNeighbors();
+    this.domElement = d3.select(document.createElementNS(d3.ns.prefix.svg, 'svg')).node();
 }
 Board.prototype.initColumns = function() {
     for (var i = 0; i < this.colCount; i++) {

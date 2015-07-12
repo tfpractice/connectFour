@@ -63,9 +63,13 @@
              return "p" + (i + 1) + "Vis";
          });
      var board = gVis.selectAll('#gameBoard')
-         .data([this.board])
+         .data(function(g) {
+             return [g.board];
+         })
          .enter()
-         .append('svg')
+         .append(function(b) {
+             return b.domElement;
+         })
          .attr('id', 'gameBoard');
      var columns = board.selectAll(".columnVis")
          .data(function(d) {
@@ -79,14 +83,14 @@
              return "column" + c.index;
          })
          .attr('fill', 'blue');
-     columns.on("click", function(c) {
-         console.log(c.domElement);
-         d3.select(this).attr('fill', 'red')
-             .append('h1')
-             .text("I HAVE BEEN CLICKED");
-         alert(c.index + "hasBeenClicked");
+     // columns.on("click", function(c) {
+     //     console.log(c.domElement);
+     //     d3.select(this).attr('fill', 'red')
+     //         .append('h1')
+     //         .text("I HAVE BEEN CLICKED");
+     //     alert(c.index + "hasBeenClicked");
 
-     });
+     // });
      $("#column2").trigger('click');
      console.log($(".columnVis"));
      var nodes = columns.selectAll(".nodeVis")
