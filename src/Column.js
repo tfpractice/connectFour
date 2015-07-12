@@ -6,6 +6,8 @@ function Column(index, nodeCount) {
     this.setVerticalNeighbors();
     this.freeIndex = this.nodeCount - 1;
     this.domElement = d3.select(document.createElementNS(d3.ns.prefix.svg, 'g')).node();
+    var colObj = this;
+    // console.log(colObj);
     d3.select(this.domElement).on('click', function(d) {
         d3.select(this);
         console.log("A D3 EVENT WAS TRIGGERED FROM WITHIN");
@@ -14,7 +16,7 @@ function Column(index, nodeCount) {
         /* Act on the event */
     });
     $(this.domElement).trigger('click');
-    console.log(this.domElement);
+    // console.log(this.domElement);
 
 }
 

@@ -1,4 +1,4 @@
-describe('Column', function() {
+fdescribe('Column', function() {
     var myColumn, myPlayer, myToken;
     beforeEach(function() {
         myColumn = new Column(1, 6);
@@ -18,6 +18,7 @@ describe('Column', function() {
         });
         it('initializes with domElement', function() {
             $("#column1").trigger('click');
+            $("#column1").click();
             console.log($("#column1"));
             console.log((myColumn.domElement));
             expect(myColumn.domElement).toBeTruthy();

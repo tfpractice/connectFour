@@ -7,7 +7,22 @@ function Node(colID, rowID) {
     this.token = null;
     this.color = "none";
     this.domElement = d3.select(document.createElementNS(d3.ns.prefix.svg, 'g')).node();
-    // this.domElement = document.createElementNS(d3.ns.prefix.svg, 'g');
+    var nodeObj = this;
+    console.log(nodeObj);
+    d3.select(this.domElement).on('click', function(d) {
+        d3.select(this);
+        console.log("A D3 EVENT WAS TRIGGERED FROM WITHIN");
+        console.log(d.domElement);
+
+        /* Act on the event */
+    });
+    $(this.domElement).on('click', function(e) {
+        console.log("A D3 EVENT WAS TRIGGERED FROM WITHIN");
+        console.log(nodeObj);
+        console.log(this);
+        /* Act on the event */
+    });
+    $(this.domElement).trigger('click'); // this.domElement = document.createElementNS(d3.ns.prefix.svg, 'g');
     // this.domSelector = "#node"+this.column+""+this.row;// console.log(this.domElement.node());
 }
 Node.prototype.placeToken = function(token) {
@@ -36,8 +51,7 @@ Node.prototype.checkMatchingNeighbors = function() {
 };
 Node.prototype.getMatchingNeighbors = function() {
     var matchingNeighbors = [];
-    if (this.occupied == false) {
-    } else if (this.occupied == true) {
+    if (this.occupied == false) {} else if (this.occupied == true) {
         var matchingKeys = Object.keys(this.neighbors).filter(function(key, id, arr) {
             return this.neighbors[key].player == this.player;
         }, this);

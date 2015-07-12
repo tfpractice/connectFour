@@ -8,6 +8,7 @@
      this.currentColIndex = this.board.currentColIndex;
      this.visualization = d3.select(document.createElementNS(d3.ns.prefix.svg, 'svg')).node();
      console.log(this.visualization);
+
  }
  Game.prototype.switchPlayer = function() {
      this.currentPlayer = (this.currentPlayer == this.player1) ? this.player2 : this.player1;
@@ -43,6 +44,8 @@
      return tmpToken;
  };
  Game.prototype.visualize = function() {
+    var gameObj = this;
+    console.log(gameObj);
      d3.selectAll('svg').remove();
      var gVis = d3.select('body').selectAll('.gameVis')
          .data([this]).enter().append(function(g) {
@@ -51,7 +54,7 @@
          })
          .classed("gameVis", true);
 
-     console.log(gVis);
+     // console.log(gVis);
      var playerVis = gVis.selectAll(".playerVis")
          .data(function(g) {
              return g.players;
@@ -92,7 +95,8 @@
 
      // });
      $("#column2").trigger('click');
-     console.log($(".columnVis"));
+     console.log(columns);
+     // console.log($(".columnVis"));
      var nodes = columns.selectAll(".nodeVis")
          .data(function(c) {
              return c.nodes;
