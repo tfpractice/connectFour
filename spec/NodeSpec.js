@@ -31,7 +31,7 @@ describe('Node', function() {
             expect(myNode.color).toEqual("none");
         });
         it('initializes with a svg domElement', function() {
-            console.log(myNode.domElement);
+            //console.log(myNode.domElement);
             expect(myNode.domElement).toBeTruthy();
 
         });

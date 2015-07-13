@@ -8,8 +8,10 @@ function Column(index, nodeCount) {
     this.domElement = d3.select(document.createElementNS(d3.ns.prefix.svg, 'g')).node();
     var colObj = this;
     // console.log(colObj);
+    this.colClick = new CustomEvent("colClick", {'detail': this});
     d3.select(this.domElement).on('click', function(d) {
         d3.select(this);
+
         console.log("A D3 EVENT WAS TRIGGERED FROM WITHIN");
         console.log(d.domElement);
 

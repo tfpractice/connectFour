@@ -7,8 +7,12 @@
      this.currentPlayer = this.player1;
      this.currentColIndex = this.board.currentColIndex;
      this.visualization = d3.select(document.createElementNS(d3.ns.prefix.svg, 'svg')).node();
-     console.log(this.visualization);
-
+     this.colHover = new CustomEvent('hover', {
+         'detail': this
+     });
+     this.gameClick = new CustomEvent("gameClick", {
+         'detail': this
+     });
  }
  Game.prototype.switchPlayer = function() {
      this.currentPlayer = (this.currentPlayer == this.player1) ? this.player2 : this.player1;
@@ -43,18 +47,35 @@
      var tmpToken = this.currentPlayer.getNextToken();
      return tmpToken;
  };
+ Game.prototype.setCustomColumnEvents = function() {
+     this.board.columns.forEach(function(col, id, arr) {
+         col.domElement.addEventListener('gameClick', function(e) {
+             console.log("now selecting column " + col.index + "");
+             e.detail.selectColumn(col.index);
+             $(col.domElement).trigger('hover');
+             console.log(e.detail);
+         });
+     }, this);
+     this.visualization.dispatchEvent(this.gameClick);
+ };
  Game.prototype.visualize = function() {
-    var gameObj = this;
-    console.log(gameObj);
+
+    var screenWidth = window.innerWidth;
+    var gameUnit = screenWidth/40;
+    var p1x = gameUnit, p1y = gameUnit, p1Width = gameUnit * 10, p2Width = gameUnit * 10;
+
+
+     var gameObj = this;
      d3.selectAll('svg').remove();
      var gVis = d3.select('body').selectAll('.gameVis')
          .data([this]).enter().append(function(g) {
              return g.visualization;
-             // body...
          })
          .classed("gameVis", true);
-
-     // console.log(gVis);
+     gVis.on('moouseenter', function(event) {
+         event.preventDefault();
+         
+     });
      var playerVis = gVis.selectAll(".playerVis")
          .data(function(g) {
              return g.players;
@@ -74,6 +95,7 @@
              return b.domElement;
          })
          .attr('id', 'gameBoard');
+     var colHoverEvt = new CustomEvent('')
      var columns = board.selectAll(".columnVis")
          .data(function(d) {
              return d.columns;
@@ -86,17 +108,19 @@
              return "column" + c.index;
          })
          .attr('fill', 'blue');
-     // columns.on("click", function(c) {
-     //     console.log(c.domElement);
-     //     d3.select(this).attr('fill', 'red')
-     //         .append('h1')
-     //         .text("I HAVE BEEN CLICKED");
-     //     alert(c.index + "hasBeenClicked");
-
-     // });
-     $("#column2").trigger('click');
+ 
+     columns.each(function(col, id) {
+         col.domElement.addEventListener('hover', function(d) {
+             d3.select(this);
+             console.log("A D3 selection was clicked, the event should be triggerd");
+             gameObj.selectColumn(col.index);
+             console.log(col);
+             console.log(d.detail);
+         });
+         console.log(gameObj.currentColIndex);
+         col.domElement.dispatchEvent(gameObj.colHover);
+     });
      console.log(columns);
-     // console.log($(".columnVis"));
      var nodes = columns.selectAll(".nodeVis")
          .data(function(c) {
              return c.nodes;

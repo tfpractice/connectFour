@@ -6,24 +6,26 @@ function Node(colID, rowID) {
     this.neighbors = {};
     this.token = null;
     this.color = "none";
+    this.colorNode = new CustomEvent('colorNode', {
+        'detail': this
+    });
+    this.clickEvent = new CustomEvent('hover', {
+        'detail': this
+    });
+    this.disp = d3.dispatch('colorNode', "click");
+    var d3dis = this.disp;
     this.domElement = d3.select(document.createElementNS(d3.ns.prefix.svg, 'g')).node();
-    var nodeObj = this;
-    console.log(nodeObj);
-    d3.select(this.domElement).on('click', function(d) {
+    d3.select(this.domElement).on('hover', function(d) {
+    });
+    this.domElement.addEventListener('colorNode', function(e) {
+        var tokenColor = e.detail.color;
+        d3.select(this).attr("fill", tokenColor);
+    });
+    this.domElement.addEventListener('hover', function(e) {
         d3.select(this);
-        console.log("A D3 EVENT WAS TRIGGERED FROM WITHIN");
-        console.log(d.domElement);
-
-        /* Act on the event */
+        console.log("A D3 selection was clicked, the event should be triggerd");
+        console.log(e.detail);
     });
-    $(this.domElement).on('click', function(e) {
-        console.log("A D3 EVENT WAS TRIGGERED FROM WITHIN");
-        console.log(nodeObj);
-        console.log(this);
-        /* Act on the event */
-    });
-    $(this.domElement).trigger('click'); // this.domElement = document.createElementNS(d3.ns.prefix.svg, 'g');
-    // this.domSelector = "#node"+this.column+""+this.row;// console.log(this.domElement.node());
 }
 Node.prototype.placeToken = function(token) {
     this.setToken(token);
@@ -37,6 +39,7 @@ Node.prototype.setNeighbor = function(relationCode, nNode) {
 };
 Node.prototype.changeColor = function(token) {
     this.color = token.color;
+    this.domElement.dispatchEvent(this.colorNode);
 };
 Node.prototype.checkMatchingNeighbors = function() {
     var result;

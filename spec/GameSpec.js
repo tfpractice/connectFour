@@ -1,4 +1,4 @@
-fdescribe('Game', function() {
+describe('Game', function() {
     var p1, p2, myGame;
     beforeEach(function() {
         p1 = new Player("Dick");
@@ -20,6 +20,12 @@ fdescribe('Game', function() {
         });
         it('instantiates with a currentColIndex ', function() {
             expect(myGame.currentColIndex).toBe(0);
+        });
+
+        describe('setCustomColumnEvents', function() {
+            it('applies a hover evet to the dom object of each column to select it', function() {
+                expect(myGame.colHover).toBeTruthy();
+            });
         });
     });
     describe('switchPlayer', function() {
