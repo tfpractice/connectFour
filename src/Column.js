@@ -11,6 +11,7 @@ function Column(index, nodeCount) {
     this.colClick = new CustomEvent("colClick", {'detail': this});
     d3.select(this.domElement).on('click', function(d) {
         d3.select(this);
+        this.dispatchEvent(e.detail.insertToken)
 
         console.log("A D3 EVENT WAS TRIGGERED FROM WITHIN");
         console.log(d.domElement);

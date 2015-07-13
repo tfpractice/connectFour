@@ -50,10 +50,10 @@
  Game.prototype.setCustomColumnEvents = function() {
      this.board.columns.forEach(function(col, id, arr) {
          col.domElement.addEventListener('gameClick', function(e) {
-             console.log("now selecting column " + col.index + "");
+             //console.log("now selecting column " + col.index + "");
              e.detail.selectColumn(col.index);
              $(col.domElement).trigger('hover');
-             console.log(e.detail);
+             //console.log(e.detail);
          });
      }, this);
      this.visualization.dispatchEvent(this.gameClick);
@@ -63,8 +63,8 @@
     var screenWidth = window.innerWidth;
     var gameUnit = screenWidth/40;
     var p1x = gameUnit, p1y = gameUnit, p1Width = gameUnit * 10, p2Width = gameUnit * 10;
-
-
+    //console.log("player 2 box iwdht");
+    //console.log(p2Width);
      var gameObj = this;
      d3.selectAll('svg').remove();
      var gVis = d3.select('body').selectAll('.gameVis')
@@ -112,15 +112,15 @@
      columns.each(function(col, id) {
          col.domElement.addEventListener('hover', function(d) {
              d3.select(this);
-             console.log("A D3 selection was clicked, the event should be triggerd");
+             //console.log("A D3 selection was clicked, the event should be triggerd");
              gameObj.selectColumn(col.index);
-             console.log(col);
-             console.log(d.detail);
+             //console.log(col);
+             //console.log(d.detail);
          });
-         console.log(gameObj.currentColIndex);
+         //console.log(gameObj.currentColIndex);
          col.domElement.dispatchEvent(gameObj.colHover);
      });
-     console.log(columns);
+     //console.log(columns);
      var nodes = columns.selectAll(".nodeVis")
          .data(function(c) {
              return c.nodes;
