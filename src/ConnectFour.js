@@ -1,6 +1,6 @@
 $(function() {
     $("#gameStartButton").on('click', function(event) {
-        event.preventDefault();
+        // event.preventDefault();
         var p1Name = $("#p1Name").val() || "Dick";
         var p2Name = $("#p2Name").val() || "Jane";
         console.log(p1Name);

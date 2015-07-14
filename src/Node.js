@@ -14,7 +14,7 @@ function Node(colID, rowID) {
     });
     this.disp = d3.dispatch('colorNode', "click");
     var d3dis = this.disp;
-    this.domElement = d3.select(document.createElementNS(d3.ns.prefix.svg, 'g')).node();
+    this.domElement = d3.select(document.createElementNS(d3.ns.prefix.svg, 'rect')).node();
     d3.select(this.domElement).on('hover', function(d) {
     });
     this.domElement.addEventListener('colorNode', function(e) {

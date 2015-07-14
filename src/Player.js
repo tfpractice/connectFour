@@ -4,7 +4,7 @@ function Player(name) {
     this.tokenIndex = null;
     this.components = [];
     this.wins = 0;
-    this.domElement = d3.select(document.createElementNS(d3.ns.prefix.svg, 'svg')).node();
+    this.domElement = d3.select(document.createElementNS(d3.ns.prefix.svg, 'rect')).node();
 }
 Player.prototype.hasComponents = function() {
     return this.components.length > 0;
