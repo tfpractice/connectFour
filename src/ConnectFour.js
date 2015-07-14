@@ -1,4 +1,5 @@
 $(function() {
+    var game;
     $("#gameStartButton").on('click', function(event) {
         // event.preventDefault();
         var p1Name = $("#p1Name").val() || "Dick";
@@ -9,9 +10,15 @@ $(function() {
         var p1 = new Player(p1Name);
         var p2 = new Player(p2Name);
 
-        var game = new Game(p1, p2);
+        game = new Game(p1, p2);
         game.visualize();
+
     });
+ $(window).resize(function(e){
+
+    console.log("window resized");
+    game.visualize();
+ });
 
 
 

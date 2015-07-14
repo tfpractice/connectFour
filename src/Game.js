@@ -57,6 +57,7 @@
      this.visualization.dispatchEvent(this.gameClick);
  };
  Game.prototype.visualize = function() {
+     d3.selectAll("svg, g, rect").remove();
      var screenWidth = window.innerWidth;
      var gameUnit = screenWidth / 40;
      var gameVisX = gameUnit,
@@ -80,18 +81,13 @@
          colSpanY = colY + (gameUnit * 6),
          nodeW = 2 * gameUnit,
          nodeH = nodeW;
-
      var boardScaleX = d3.scale.linear()
          .domain([0, 7])
          .range([boardX, boardSpan]);
      var boardScaleY = d3.scale.linear()
          .domain([0, 6])
          .range([colY, colSpanY]);
-
-
-
      var gameObj = this;
-
      var gVis = d3.select('#gb').selectAll('.gameVis')
          .data([this]).enter().append(function(g) {
              return g.visualization;
@@ -146,7 +142,6 @@
              width: boardWidth,
              height: boardHeight
          }).style('background-color', '#00ff00');
-     console.log(board);
      var colHoverEvt = new CustomEvent('')
      var columns = board.selectAll(".columnVis")
          .data(function(d) {
@@ -171,28 +166,17 @@
              height: colHeight
          }).style("background-color", "#ff00ff")
          .on('mouseenter', function(col) {
-             // this.dispatchEvent(gameObj.colHover);
              gameObj.selectColumn(col.index);
-             console.log(gameObj.currentColIndex);
-
-         });
-
-     console.log(columns);
-     // columns.each(function(col, id) {
-     //     col.domElement.addEventListener('mouseenter', function(d) {
-     //         d3.select(this);
-     //         gameObj.selectColumn(col.index);
-     //         console.log(gameObj.currentColIndex);
-     //     });
-     // });
+         }).on('click', function(col) {
+             gameObj.selectColumn(col.index);
+             gameObj.playToken(); 
+         });;
      var nodes = columns.selectAll(".nodeVis")
          .data(function(c) {
              return c.nodes;
          })
          .enter()
          .append(function(n) {
-             return n.domElement;
-         }, function(n) {
              return n.domElement;
          })
          .classed("nodeVis", true).attr('id', function(n) {
@@ -205,14 +189,16 @@
              y: function(d, i) {
                  return (d.row * nodeH);
              },
-             fill: "#00ffff",
+             fill: function(d, i) {
+                 return (d.color);
+             },
              stroke: "#00ff00",
              width: nodeW,
              height: nodeH
          })
-         .style("stroke", "#000000");
-
-
+         .style("stroke", "#000000").on('colorNode', function(event) {
+             
+         });
+     console.log(nodes);
      console.log($(".nodeVis"));
-
  };

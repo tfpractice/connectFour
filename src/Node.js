@@ -5,26 +5,23 @@ function Node(colID, rowID) {
     this.player = null;
     this.neighbors = {};
     this.token = null;
-    this.color = "none";
+    this.color = "#ffffff";
     this.colorNode = new CustomEvent('colorNode', {
         'detail': this
     });
     this.clickEvent = new CustomEvent('hover', {
         'detail': this
     });
-    this.disp = d3.dispatch('colorNode', "click");
-    var d3dis = this.disp;
     this.domElement = d3.select(document.createElementNS(d3.ns.prefix.svg, 'rect')).node();
-    d3.select(this.domElement).on('hover', function(d) {
-    });
     this.domElement.addEventListener('colorNode', function(e) {
         var tokenColor = e.detail.color;
+        console.log("The color of the token is changing");
+        console.log(e.detail);
+        console.log(tokenColor);
         d3.select(this).attr("fill", tokenColor);
     });
     this.domElement.addEventListener('hover', function(e) {
         d3.select(this);
-        console.log("A D3 selection was clicked, the event should be triggerd");
-        console.log(e.detail);
     });
 }
 Node.prototype.placeToken = function(token) {
