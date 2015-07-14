@@ -12,13 +12,20 @@ function Node(colID, rowID) {
     this.clickEvent = new CustomEvent('hover', {
         'detail': this
     });
-    this.domElement = d3.select(document.createElementNS(d3.ns.prefix.svg, 'rect')).node();
+    this.domElement = d3.select(document.createElementNS(d3.ns.prefix.svg, 'svg'))
+                        .attr('stroke', '#000000').style("border", "1px solid black")
+                        .append('circle')
+                        .node();
     this.domElement.addEventListener('colorNode', function(e) {
         var tokenColor = e.detail.color;
         console.log("The color of the token is changing");
         console.log(e.detail);
         console.log(tokenColor);
-        d3.select(this).attr("fill", tokenColor);
+        d3.select(this).attr({
+            fill: tokenColor,
+            stroke: tokenColor
+            
+        });
     });
     this.domElement.addEventListener('hover', function(e) {
         d3.select(this);

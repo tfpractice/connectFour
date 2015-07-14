@@ -57,7 +57,7 @@
      this.visualization.dispatchEvent(this.gameClick);
  };
  Game.prototype.visualize = function() {
-     d3.selectAll("svg, g, rect").remove();
+     d3.selectAll("svg, g, rect, circle").remove();
      var screenWidth = window.innerWidth;
      var gameUnit = screenWidth / 40;
      var gameVisX = gameUnit,
@@ -169,7 +169,7 @@
              gameObj.selectColumn(col.index);
          }).on('click', function(col) {
              gameObj.selectColumn(col.index);
-             gameObj.playToken(); 
+             gameObj.playToken();
          });;
      var nodes = columns.selectAll(".nodeVis")
          .data(function(c) {
@@ -183,22 +183,24 @@
              return "node" + n.column + n.row + ""
          })
          .attr({
-             x: function(d, i) {
-                 return boardX + gameUnit + (d.column * nodeW);
+             cx: function(d, i) {
+                 return boardX + (gameUnit * 1.5) + (d.column * nodeW);
              },
-             y: function(d, i) {
-                 return (d.row * nodeH);
+             cy: function(d, i) {
+                 return (d.row * nodeH) + (nodeH * 1.5);
              },
+             r: nodeW / 2,
              fill: function(d, i) {
                  return (d.color);
              },
-             stroke: "#00ff00",
+             stroke: function(d, i) {
+                 return (d.color);
+             },
              width: nodeW,
              height: nodeH
          })
-         .style("stroke", "#000000").on('colorNode', function(event) {
-             
-         });
+         .style("stroke", "#000000");
+
      console.log(nodes);
      console.log($(".nodeVis"));
  };
