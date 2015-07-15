@@ -4,7 +4,23 @@ function Player(name) {
     this.tokenIndex = null;
     this.components = [];
     this.wins = 0;
-    this.domElement = d3.select(document.createElementNS(d3.ns.prefix.svg, 'rect')).node();
+    this.domElement = d3.select(document.createElementNS(d3.ns.prefix.svg, 'svg')).node();
+    this.domElement.addEventListener('changeOpacity', function(e) {
+        // var tokenColor = e.detail.color;
+        console.log("The color of the svg is changing");
+
+         // if (e.detail.currentPlayer.domElement == this) {
+                 // d3.select(this).style("opacity", 0.75);
+             // } else {
+                 // d3.select(this).style("opacity", 0.3);
+             // };
+
+
+        console.log(e.detail.currentPlayer.domElement == this);
+        // console.log(tokenColor);
+        // d3.select(this).style("opacity");
+    });
+
 }
 Player.prototype.hasComponents = function() {
     return this.components.length > 0;

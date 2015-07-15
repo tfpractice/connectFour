@@ -13,9 +13,15 @@
      this.gameClick = new CustomEvent("gameClick", {
          'detail': this
      });
+     this.changeOpacity = new CustomEvent('changeOpacity', {
+         'detail': this
+     });
  }
  Game.prototype.switchPlayer = function() {
+
      this.currentPlayer = (this.currentPlayer == this.player1) ? this.player2 : this.player1;
+     this.player1.domElement.dispatchEvent(this.changeOpacity);
+     this.player2.domElement.dispatchEvent(this.changeOpacity);
  };
  Game.prototype.distributeTokens = function() {
      var tokenCount = 7 * 6;
@@ -68,9 +74,9 @@
          p1y = gameVisY + gameUnit,
          p1Width = gameUnit * 10,
          p2Width = gameUnit * 10,
-         p2x = gameUnit * 30,
+         p2x = gameUnit * 28,
          playerWidth = 9 * gameUnit,
-         boardX = gameVisX + (10 * gameUnit),
+         boardX = gameVisX + (11 * gameUnit),
          boardY = gameVisY,
          boardWidth = 14 * gameUnit,
          boardHeight = 16 * gameUnit,
@@ -98,6 +104,8 @@
              height: gameVisHeight
          })
          .style('opacity', 0.2);
+
+
      var playerVis = gVis.selectAll(".playerVis")
          .data(function(g) {
              return g.players;
@@ -109,7 +117,25 @@
          .classed("playerVis", true)
          .attr('id', function(p, i) {
              return "p" + (i + 1) + "Vis";
-         })
+         }).attr('stroke', function(p) {
+             return p.tokens[0].color;
+         }).on('changeOpacity', function(p) {
+             // event.preventDefault();
+
+             if (gameObj.currentPlayer == p) {
+                 // console.log
+                 console.log("chnaging opacity");
+
+                 console.log(p);
+                 d3.select(this).style("opacity", 0.75);
+             } else {
+                 console.log("wrong domElement");
+
+                 d3.select(this).style("opacity", 0.3);
+             };
+             /* Act on the event */
+         });
+     playerVis.append('rect')
          .attr({
              x: function(p, i) {
                  if (i == 0) {
@@ -119,11 +145,110 @@
                  };
              },
              y: p1y,
-             fill: "#00ff00",
+             fill: function(p) {
+                 return p.tokens[0].color;
+             },
              width: p1Width,
              height: p1Width
          })
          .style('opacity', 0.2);
+     // var tokens = playerVis.selectAll(".tokenVis")
+     //    .data(function  (p) {
+     //        return p.tokens;
+     //    })
+     //    .enter()
+     //    .append(function  (t) {
+     //        return t.domElement;
+     //    }).classed("tokenVis", true)
+     //    .attr({
+     //        cx: function  (t,i) {
+     //            return p1x + ((i%3) *nodeW);
+     //        },
+     //        cy: function  (t,i) {
+     //            return p1y + ((Math.floor(i/3)) * nodeW);
+     //        },
+     //        r: nodeW/2
+     //    });
+
+
+
+     d3.select("#p1Vis").selectAll(".tokenVis")
+         .data(gameObj.player1.tokens)
+         .enter()
+         .append(function(t) {
+             return t.domElement;
+         }).classed("tokenVis", true)
+         .attr({
+             cx: function(t, i) {
+                 return p1x + ((i % 3) * (1.5 * nodeW));
+             },
+             cy: function(t, i) {
+                 return p1y + ((Math.floor(i / 3)) * nodeW);
+             },
+             r: nodeW / 2,
+             fill: function(t) {
+                 return t.color;
+             }
+         });
+     d3.select("#p2Vis").selectAll(".tokenVis")
+         .data(gameObj.player2.tokens)
+         .enter()
+         .append(function(t) {
+             return t.domElement;
+         }).classed("tokenVis", true)
+         .attr({
+             cx: function(t, i) {
+                 return p2x + nodeW + ((i % 3) * (1.5 * nodeW));
+             },
+             cy: function(t, i) {
+                 return p1y + ((Math.floor(i / 3)) * nodeW);
+             },
+             r: nodeW / 2,
+             fill: function(t) {
+                 return t.color;
+             }
+         });
+     // var playerDiv = gVis.selectAll(".playerDiv")
+     //     .data(function(g) {
+     //         return g.players;
+     //     }).enter()
+     //     .insert('div')
+     //     .classed("playerDiv", true)
+     //     .attr('id', function(player, i) {
+     //         // body...
+     //         return "p" + (i + 1) + "Div";
+     //     });
+
+
+     d3.select("#p1Info").selectAll("#p1Name")
+         .data([gameObj.player1])
+         .enter()
+         .append("h1")
+         .attr('id', 'p1Name')
+         .html(function(p) {
+             return p.name
+         });
+
+
+     d3.select("#p2Info").selectAll("#p2Name")
+         .data([gameObj.player2])
+         .enter()
+         .append("h1")
+         .attr('id', 'p2Name')
+         .html(function(p) {
+             return p.name
+         });
+     // .classed("playerDiv", true)
+     // .attr('id', "p1Div")
+     // .append("h1")
+     // .text(function(p){
+     //    return p.name;
+     // });    
+
+     d3.select("#p2Vis").insert("div")
+         .classed("playerDiv", true)
+         .attr('id', "p2Div");
+
      var board = gVis
          .selectAll('#gameBoard')
          .data(function(g) {
@@ -170,7 +295,7 @@
          }).on('click', function(col) {
              gameObj.selectColumn(col.index);
              gameObj.playToken();
-         });;
+         });
      var nodes = columns.selectAll(".nodeVis")
          .data(function(c) {
              return c.nodes;
