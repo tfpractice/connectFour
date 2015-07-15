@@ -3,6 +3,8 @@
      this.player2 = p2;
      this.players = [this.player1, this.player2];
      this.board = new Board(7, 6);
+     this.player1.startNewGame();
+     this.player2.startNewGame();
      this.distributeTokens();
      this.currentPlayer = this.player1;
      this.currentColIndex = this.board.currentColIndex;
@@ -44,6 +46,7 @@
          if (this.currentPlayer.checkWin() == true) {
              var winArray = this.currentPlayer.getWinningComponents();
              alert(this.currentPlayer.name + "  HAS WON THE CURRENT GAME VIA THESE COMPONENTS" + winArray.toString());
+
          } else {
              this.switchPlayer();
          };
@@ -220,23 +223,43 @@
      //     });
 
 
-     d3.select("#p1Info").selectAll("#p1Name")
+     var p1Stats = d3.select("#p1Info");
+
+     p1Stats.selectAll("#p1Name")
          .data([gameObj.player1])
          .enter()
          .append("h1")
          .attr('id', 'p1Name')
          .html(function(p) {
-             return p.name
+             return p.name;
+         });
+     p1Stats.selectAll("#p1Score")
+         .data([gameObj.player1])
+         .enter()
+         .append("h1")
+         .attr('id', 'p1Score')
+         .html(function(p) {
+             return p.wins;
          });
 
+     var p2Stats = d3.select("#p2Info");
 
-     d3.select("#p2Info").selectAll("#p2Name")
+     p2Stats.selectAll("#p2Name")
          .data([gameObj.player2])
          .enter()
          .append("h1")
          .attr('id', 'p2Name')
          .html(function(p) {
              return p.name
+         });
+
+     p2Stats.selectAll("#p2Score")
+         .data([gameObj.player2])
+         .enter()
+         .append("h1")
+         .attr('id', 'p2Score')
+         .html(function(p) {
+             return p.wins;
          });
      // .classed("playerDiv", true)
      // .attr('id', "p1Div")

@@ -108,7 +108,7 @@ describe('Game', function() {
             });
         });
     });
-    describe('#visualize', function() {
+    xdescribe('#visualize', function() {
         beforeEach(function() {
             myGame.visualize();
         });

@@ -27,8 +27,8 @@ describe('Node', function() {
         it('initializes with no token ', function() {
             expect(myNode.token).toEqual(null);
         });
-        it('initializes with no color ', function() {
-            expect(myNode.color).toEqual("none");
+        it('initializes with a white color ', function() {
+            expect(myNode.color).toEqual("#ffffff");
         });
         it('initializes with a svg domElement', function() {
             //console.log(myNode.domElement);

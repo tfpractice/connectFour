@@ -24,6 +24,34 @@ describe('Player', function() {
             expect(myPlayer.domElement).toBeTruthy();
         });
     });
+    describe('#startNewGame', function() {
+        it('calls all initialization methods but maintains score ', function() {
+
+            myPlayer.startNewGame();
+            expect(myPlayer.tokens).toBeEmptyArray();
+        });
+    });
+    describe('incrementScore', function() {
+        it('increases score by one', function() {
+            myPlayer.incrementScore();
+            expect(myPlayer.wins).toBeTruthy(1);
+        });
+
+    });
+    describe('clearTokens', function() {
+        it('resets the players tokens to an empty array', function() {
+            myPlayer.clearTokens();
+            expect(myPlayer.tokens).toBeEmptyArray();
+        });
+
+    });
+    describe('clearComponents', function() {
+        it('sets the player components to an empty array', function() {
+            myPlayer.clearComponents();
+            expect(myPlayer.components).toBeEmptyArray();
+        });
+
+    });
     describe('#hasComponents', function() {
         it('determines if the player has any components', function() {
             expect(myPlayer.hasComponents()).toBeFalse();
@@ -106,15 +134,15 @@ describe('Player', function() {
                 n33.placeToken(t33);
                 n43.placeToken(t43);
                 myPlayer.aritySort();
-               expect(myPlayer.components[0].arity).toBe(3);
+                expect(myPlayer.components[0].arity).toBe(3);
 
-           });
+            });
         });
-       describe('#checkWin', function() {
+        describe('#checkWin', function() {
             it('retuns false if there are no arity-4 components', function() {
                 expect(myPlayer.checkWin()).toBeFalse();
             });
-           it('returns true if any component has an arity over 3', function() {
+            it('returns true if any component has an arity over 3', function() {
                 var n13 = myBoard.columns[1].nodes[3];
                 var n23 = myBoard.columns[2].nodes[3];
                 var n33 = myBoard.columns[3].nodes[3];
@@ -127,10 +155,10 @@ describe('Player', function() {
                 n23.placeToken(t23);
                 n33.placeToken(t33);
                 n43.placeToken(t43);
-               expect(myPlayer.checkWin()).toBeTrue();
+                expect(myPlayer.checkWin()).toBeTrue();
             });
         });
-       describe('getWinningComponents', function() {
+        describe('getWinningComponents', function() {
             it('retuns the winning components', function() {
                 var n13 = myBoard.columns[1].nodes[3];
                 var n23 = myBoard.columns[2].nodes[3];
@@ -144,12 +172,12 @@ describe('Player', function() {
                 n23.placeToken(t23);
                 n33.placeToken(t33);
                 n43.placeToken(t43);
-               expect(myPlayer.getWinningComponents()).not.toBeEmptyArray();
+                expect(myPlayer.getWinningComponents()).not.toBeEmptyArray();
 
-           });
+            });
         });
 
-       describe('addToken', function() {
+        describe('addToken', function() {
             it('adds a token to the players token array', function() {
                 var tmpToken = new Token(myPlayer, "#ff0000");
                 myPlayer.addToken(tmpToken);
