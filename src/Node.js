@@ -18,9 +18,6 @@ function Node(colID, rowID) {
                         .node();
     this.domElement.addEventListener('colorNode', function(e) {
         var tokenColor = e.detail.color;
-        console.log("The color of the token is changing");
-        console.log(e.detail);
-        console.log(tokenColor);
         d3.select(this).attr({
             fill: tokenColor,
             stroke: tokenColor

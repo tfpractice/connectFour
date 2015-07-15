@@ -6,23 +6,8 @@ function Player(name) {
     this.wins = 0;
     this.domElement = d3.select(document.createElementNS(d3.ns.prefix.svg, 'svg')).node();
     this.domElement.addEventListener('changeOpacity', function(e) {
-        // var tokenColor = e.detail.color;
-        console.log("The color of the svg is changing");
-
-        // if (e.detail.currentPlayer.domElement == this) {
-        // d3.select(this).style("opacity", 0.75);
-        // } else {
-        // d3.select(this).style("opacity", 0.3);
-        // };
-
-
-        console.log(e.detail.currentPlayer.domElement == this);
-        // console.log(tokenColor);
-        // d3.select(this).style("opacity");
     });
-
 }
-
 Player.prototype.startNewGame = function() {
     this.clearTokens();
     this.clearComponents();
@@ -31,7 +16,6 @@ Player.prototype.hasComponents = function() {
     return this.components.length > 0;
 };
 Player.prototype.getComponent = function(n1, n2, relCode) {
-
     var tmpComp = new Component(n1, n2, relCode);
     return tmpComp;
 };
@@ -66,14 +50,7 @@ Player.prototype.addComponent = function(newComp) {
             this.unionizeComponents(oIComp, newComp);
         }, this);
     };
-
     this.aritySort();
-    // this.getWinningComponents();
-    // var winning = this.checkWin();
-    // if (winning == true) {
-    // //console.log(this.name + " Has won the current game");
-    // };
-
 };
 Player.prototype.getDirectedComponents = function(newComp) {
     if (this.hasDirectedComponents(newComp) == true) {
@@ -139,7 +116,6 @@ Player.prototype.addToken = function(token) {
     this.tokens.push(token);
     this.tokenIndex = this.tokens.length - 1;
 };
-
 Player.prototype.aritySort = function() {
     var iVal, tmpComp, compCount = this.components.length;
     for (var oVal = 0; oVal < compCount; oVal++) {
@@ -150,24 +126,18 @@ Player.prototype.aritySort = function() {
             --iVal;
         }
         this.components[iVal] = tmpComp;
-
     };
     this.components.reverse();
-    //console.log(this.components);
 };
-
 Player.prototype.checkWin = function() {
     var result = this.components.some(function(comp, index, arr) {
         return comp.arity > 3;
     }, this);
-
     return result;
-
 };
 Player.prototype.clearTokens = function() {
     this.tokens = [];
     this.tokenIndex = null;
-
 };
 Player.prototype.clearComponents = function() {
     this.components = [];
@@ -175,8 +145,6 @@ Player.prototype.clearComponents = function() {
 Player.prototype.getWinningComponents = function() {
     if (this.checkWin() == true) {
         this.incrementScore();
-        console.log("the player has won" + this.wins + "games");
-
         return this.components.filter(function(comp, id, arr) {
             return comp.arity > 3;
         }, this);

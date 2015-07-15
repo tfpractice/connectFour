@@ -9,6 +9,7 @@
      this.currentPlayer = this.player1;
      this.currentColIndex = this.board.currentColIndex;
      this.visualization = d3.select(document.createElementNS(d3.ns.prefix.svg, 'svg')).node();
+     this.winCoordinates = [];
      this.colHover = new CustomEvent('mouseenter', {
          'detail': this
      });
@@ -18,10 +19,13 @@
      this.changeOpacity = new CustomEvent('changeOpacity', {
          'detail': this
      });
-
      this.gameWon = new CustomEvent('gameWon', {
          'detail': this
      });
+     this.drawWinningLine = new CustomEvent('drawWinningLine', {
+         'detail': this
+     });
+     this.visualize();
  }
  Game.prototype.switchPlayer = function() {
      this.currentPlayer = (this.currentPlayer == this.player1) ? this.player2 : this.player1;
@@ -48,15 +52,24 @@
      if (success == true) {
          if (this.currentPlayer.checkWin() == true) {
              var winArray = this.currentPlayer.getWinningComponents();
+             this.assembleWinningCoordinates(winArray);
              alert(this.currentPlayer.name + "  HAS WON THE CURRENT GAME VIA THESE COMPONENTS" + winArray.toString());
              document.getElementById("p1Info").dispatchEvent(this.gameWon);
              document.getElementById("p2Info").dispatchEvent(this.gameWon);
-
-
+             document.getElementById("gameStartButton").dispatchEvent(this.gameWon);
          } else {
              this.switchPlayer();
          };
      };
+ };
+ Game.prototype.assembleWinningCoordinates = function(winArray) {
+     var winCoords = [];
+     winArray[0].nodes.forEach(function(node, id, arr) {
+         var nodeC = [(node.domElement.cx.baseVal.value), (node.domElement.cy.baseVal.value)];
+         winCoords.push(nodeC);
+     }, this);
+     this.winCoordinates = winCoords;
+     document.getElementById("gameBoard").dispatchEvent(this.drawWinningLine);
  };
  Game.prototype.getToken = function() {
      var tmpToken = this.currentPlayer.getNextToken();
@@ -72,7 +85,7 @@
      this.visualization.dispatchEvent(this.gameClick);
  };
  Game.prototype.visualize = function() {
-     d3.selectAll("svg, g, rect, circle").remove();
+     d3.selectAll("svg, g, rect, circle, line, path").remove();
      var screenWidth = window.innerWidth;
      var gameUnit = screenWidth / 40;
      var gameVisX = gameUnit,
@@ -128,14 +141,10 @@
              return p.tokens[0].color;
          }).on('changeOpacity', function(p) {
              if (gameObj.currentPlayer == p) {
-                 console.log("chnaging opacity");
-                 console.log(p);
                  d3.select(this).style("opacity", 0.75);
              } else {
-                 console.log("wrong domElement");
                  d3.select(this).style("opacity", 0.3);
              };
-
          });
      playerVis.append('rect')
          .attr({
@@ -192,13 +201,9 @@
          });
      var p1Stats = d3.select("#p1Info")
          .on('gameWon', function(p) {
-             // event.preventDefault();
-             console.log("somebody Won");
-
              d3.select("#p1Score").html(function(p) {
                  return p.wins;
              });
-             /* Act on the event */
          });
      p1Stats.selectAll("#p1Name")
          .data([gameObj.player1])
@@ -218,11 +223,9 @@
          });
      var p2Stats = d3.select("#p2Info")
          .on('gameWon', function(p) {
-             console.log("somebody Won");
              d3.select("#p2Score").html(function(p) {
                  return p.wins;
              });
-             /* Act on the event */
          });
      p2Stats.selectAll("#p2Name")
          .data([gameObj.player2])
@@ -243,6 +246,14 @@
      d3.select("#p2Vis").insert("div")
          .classed("playerDiv", true)
          .attr('id', "p2Div");
+     var lineFunction = d3.svg.line()
+         .x(function(d) {
+             return d[0];
+         })
+         .y(function(d) {
+             return d[1];
+         })
+         .interpolate("linear");
      var board = gVis
          .selectAll('#gameBoard')
          .data(function(g) {
@@ -261,6 +272,13 @@
              width: boardWidth,
              height: boardHeight
          }).style('background-color', '#00ff00');
+     board.on('drawWinningLine', function(d) {
+         d3.select(this).append('path')
+             .attr("d", lineFunction(gameObj.winCoordinates))
+             .attr("stroke", "#00ff00")
+             .attr("stroke-width", 10)
+             .attr("fill", "none");
+     });
      var colHoverEvt = new CustomEvent('')
      var columns = board.selectAll(".columnVis")
          .data(function(d) {
@@ -320,6 +338,4 @@
              height: nodeH
          })
          .style("stroke", "#000000");
-     console.log(nodes);
-     console.log($(".nodeVis"));
  };
