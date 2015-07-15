@@ -18,9 +18,12 @@
      this.changeOpacity = new CustomEvent('changeOpacity', {
          'detail': this
      });
+
+     this.gameWon = new CustomEvent('gameWon', {
+         'detail': this
+     });
  }
  Game.prototype.switchPlayer = function() {
-
      this.currentPlayer = (this.currentPlayer == this.player1) ? this.player2 : this.player1;
      this.player1.domElement.dispatchEvent(this.changeOpacity);
      this.player2.domElement.dispatchEvent(this.changeOpacity);
@@ -46,6 +49,9 @@
          if (this.currentPlayer.checkWin() == true) {
              var winArray = this.currentPlayer.getWinningComponents();
              alert(this.currentPlayer.name + "  HAS WON THE CURRENT GAME VIA THESE COMPONENTS" + winArray.toString());
+             document.getElementById("p1Info").dispatchEvent(this.gameWon);
+             document.getElementById("p2Info").dispatchEvent(this.gameWon);
+
 
          } else {
              this.switchPlayer();
@@ -107,8 +113,6 @@
              height: gameVisHeight
          })
          .style('opacity', 0.2);
-
-
      var playerVis = gVis.selectAll(".playerVis")
          .data(function(g) {
              return g.players;
@@ -123,20 +127,15 @@
          }).attr('stroke', function(p) {
              return p.tokens[0].color;
          }).on('changeOpacity', function(p) {
-             // event.preventDefault();
-
              if (gameObj.currentPlayer == p) {
-                 // console.log
                  console.log("chnaging opacity");
-
                  console.log(p);
                  d3.select(this).style("opacity", 0.75);
              } else {
                  console.log("wrong domElement");
-
                  d3.select(this).style("opacity", 0.3);
              };
-             /* Act on the event */
+
          });
      playerVis.append('rect')
          .attr({
@@ -155,26 +154,6 @@
              height: p1Width
          })
          .style('opacity', 0.2);
-     // var tokens = playerVis.selectAll(".tokenVis")
-     //    .data(function  (p) {
-     //        return p.tokens;
-     //    })
-     //    .enter()
-     //    .append(function  (t) {
-     //        return t.domElement;
-     //    }).classed("tokenVis", true)
-     //    .attr({
-     //        cx: function  (t,i) {
-     //            return p1x + ((i%3) *nodeW);
-     //        },
-     //        cy: function  (t,i) {
-     //            return p1y + ((Math.floor(i/3)) * nodeW);
-     //        },
-     //        r: nodeW/2
-     //    });
-
-
-
      d3.select("#p1Vis").selectAll(".tokenVis")
          .data(gameObj.player1.tokens)
          .enter()
@@ -211,20 +190,16 @@
                  return t.color;
              }
          });
-     // var playerDiv = gVis.selectAll(".playerDiv")
-     //     .data(function(g) {
-     //         return g.players;
-     //     }).enter()
-     //     .insert('div')
-     //     .classed("playerDiv", true)
-     //     .attr('id', function(player, i) {
-     //         // body...
-     //         return "p" + (i + 1) + "Div";
-     //     });
+     var p1Stats = d3.select("#p1Info")
+         .on('gameWon', function(p) {
+             // event.preventDefault();
+             console.log("somebody Won");
 
-
-     var p1Stats = d3.select("#p1Info");
-
+             d3.select("#p1Score").html(function(p) {
+                 return p.wins;
+             });
+             /* Act on the event */
+         });
      p1Stats.selectAll("#p1Name")
          .data([gameObj.player1])
          .enter()
@@ -241,9 +216,14 @@
          .html(function(p) {
              return p.wins;
          });
-
-     var p2Stats = d3.select("#p2Info");
-
+     var p2Stats = d3.select("#p2Info")
+         .on('gameWon', function(p) {
+             console.log("somebody Won");
+             d3.select("#p2Score").html(function(p) {
+                 return p.wins;
+             });
+             /* Act on the event */
+         });
      p2Stats.selectAll("#p2Name")
          .data([gameObj.player2])
          .enter()
@@ -252,7 +232,6 @@
          .html(function(p) {
              return p.name
          });
-
      p2Stats.selectAll("#p2Score")
          .data([gameObj.player2])
          .enter()
@@ -261,17 +240,9 @@
          .html(function(p) {
              return p.wins;
          });
-     // .classed("playerDiv", true)
-     // .attr('id', "p1Div")
-     // .append("h1")
-     // .text(function(p){
-     //    return p.name;
-     // });    
-
      d3.select("#p2Vis").insert("div")
          .classed("playerDiv", true)
          .attr('id', "p2Div");
-
      var board = gVis
          .selectAll('#gameBoard')
          .data(function(g) {
@@ -312,7 +283,8 @@
              stroke: "#00ff00",
              width: colWidth,
              height: colHeight
-         }).style("background-color", "#ff00ff")
+         })
+         .style("background-color", "#ff00ff")
          .on('mouseenter', function(col) {
              gameObj.selectColumn(col.index);
          }).on('click', function(col) {
@@ -348,7 +320,6 @@
              height: nodeH
          })
          .style("stroke", "#000000");
-
      console.log(nodes);
      console.log($(".nodeVis"));
  };
