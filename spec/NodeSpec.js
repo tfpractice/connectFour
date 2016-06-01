@@ -1,9 +1,9 @@
-describe('Node', function() {
+fdescribe('Node', function() {
     var myNode;
     var myCTNeighbor;
     beforeEach(function() {
-        myNode = new Node(1, 3);
-        myCTNeighbor = new Node(1, 2);
+        myNode = new C4.Node(1, 3);
+        myCTNeighbor = new C4.Node(1, 2);
         myPlayer = new Player("John");
         myToken = new Token(myPlayer, "#000000");
         mySecondToken = new Token(myPlayer, "#000000");
@@ -85,7 +85,7 @@ describe('Node', function() {
         describe('when multiple matching neighbors can become one component', function() {
             it('combines the players components', function() {
                 var myThirdToken = new Token(myPlayer, "#000000");
-                var myCBNeighbor = new Node(1, 4);
+                var myCBNeighbor = new C4.Node(1, 4);
                 myNode.setNeighbor("cb", myCBNeighbor);
                 myCBNeighbor.setNeighbor("ct", myNode);
                 myCTNeighbor.placeToken(myToken);
