@@ -1,7 +1,7 @@
-describe('Column', function() {
+fdescribe('Column', function() {
     var myColumn, myPlayer, myToken;
     beforeEach(function() {
-        myColumn = new Column(1, 6);
+        myColumn = new C4.Column(1, 6);
         myPlayer = new Player("John");
         myToken = new Token(myPlayer, "#000000");
 
@@ -26,7 +26,7 @@ describe('Column', function() {
     });
     describe('#addNode', function() {
         it('appends a node to the nodes array', function() {
-            var myNode1 = new Node(1, 0);
+            var myNode1 = new C4.Node(1, 0);
             myColumn.addNode(myNode1);
             expect(myColumn.nodes.length).toBe(7);
         });
@@ -42,7 +42,7 @@ describe('Column', function() {
             expect(myColumn.isAvailable).toBeTruthy();
         });
         it('returns false if the freeIndex is less than zero', function() {
-            tmpColumn = new Column(3, 6);
+            tmpColumn = new C4.Column(3, 6);
             tmpPlayer = new Player("zach");
             for (var i = 0; i < 6; i++) {
                 tempToken = new Token(tmpPlayer, "#ff00ff");

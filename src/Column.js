@@ -1,4 +1,4 @@
-function Column(index, nodeCount) {
+C4.Column = function(index, nodeCount) {
     this.index = index;
     this.nodeCount = nodeCount;
     this.nodes = [];
@@ -22,27 +22,27 @@ function Column(index, nodeCount) {
 
         /* Act on the event */
     });
-  this.domElement.addEventListener('colClick', function(e) {
+    this.domElement.addEventListener('colClick', function(e) {
         // var tokenColor = e.detail.color;
         console.log(e.detail);
     });
-  
-
-}
 
 
-Column.prototype.addNode = function(node) {
+};
+
+
+C4.Column.prototype.addNode = function(node) {
     this.nodes.push(node);
 
 };
 
-Column.prototype.initializeNodes = function() {
+C4.Column.prototype.initializeNodes = function() {
     for (var i = 0; i < this.nodeCount; i++) {
-        this.nodes[i] = new Node(this.index, i);
+        this.nodes[i] = new C4.Node(this.index, i);
     };
 };
 
-Column.prototype.isAvailable = function() {
+C4.Column.prototype.isAvailable = function() {
 
 
     if (this.freeIndex < 0) {
@@ -54,7 +54,7 @@ Column.prototype.isAvailable = function() {
     };
 };
 
-Column.prototype.setVerticalNeighbors = function() {
+C4.Column.prototype.setVerticalNeighbors = function() {
     for (var i = 0; i < this.nodes.length - 1; i++) {
         var currNode = this.nodes[i];
         var nextNode = this.nodes[i + 1];
@@ -64,11 +64,11 @@ Column.prototype.setVerticalNeighbors = function() {
 };
 
 
-Column.prototype.decrementIndex = function() {
+C4.Column.prototype.decrementIndex = function() {
     this.freeIndex--;
 };
 
-Column.prototype.placeToken = function(token) {
+C4.Column.prototype.placeToken = function(token) {
     this.nodes[this.freeIndex].placeToken(token);
     this.decrementIndex();
 };
