@@ -15,7 +15,7 @@ C4.Player.prototype.hasComponents = function() {
     return this.components.length > 0;
 };
 C4.Player.prototype.getComponent = function(n1, n2, relCode) {
-    var tmpComp = new Component(n1, n2, relCode);
+    var tmpComp = new C4.Component(n1, n2, relCode);
     return tmpComp;
 };
 C4.Player.prototype.placeToken = function(board, token, colIndex) {

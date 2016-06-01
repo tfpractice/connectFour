@@ -72,7 +72,7 @@ C4.Node.prototype.getComponent = function(nNode, relationCode) {
         } else if (this.confirmNeighborStatus(nNode, relationCode) == false) {
             throw new Error("these nodes are not neighbors");
         } else if ((this.checkMatch(nNode) == true) && (this.confirmNeighborStatus(nNode, relationCode) == true)) {
-            var tmpComp = new Component(this, nNode, relationCode);
+            var tmpComp = new C4.Component(this, nNode, relationCode);
             return tmpComp;
         }
     } catch (err) {

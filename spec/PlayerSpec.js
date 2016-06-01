@@ -66,8 +66,8 @@ fdescribe('Player', function() {
     describe('component comparisons', function() {
         var myComponent, n2n3Component;
         beforeEach(function() {
-            myComponent = new Component(n1, n2, "rt");
-            n2n3Component = new Component(n2, n3, "rt");
+            myComponent = new C4.Component(n1, n2, "rt");
+            n2n3Component = new C4.Component(n2, n3, "rt");
             myPlayer.addComponent(myComponent);
         });
         describe('#getComponent', function() {

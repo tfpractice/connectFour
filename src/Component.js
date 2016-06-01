@@ -1,17 +1,17 @@
-function Component(n1, n2, relationCode) {
+C4.Component = function(n1, n2, relationCode) {
     this.nodes = [n1, n2];
     this.player = n1.player;
     this.arity = 2;
     this.verifyMemberPlayers();
     this.direction;
     this.determineDirection(relationCode);
-}
-Component.prototype.verifyMemberPlayers = function() {
+};
+C4.Component.prototype.verifyMemberPlayers = function() {
     return this.nodes.every(function(node, id, arr) {
         return node.player == this.player;
     }, this);
 };
-Component.prototype.determineDirection = function(relationCode) {
+C4.Component.prototype.determineDirection = function(relationCode) {
     switch (relationCode) {
         case "ct":
         case "cb":
@@ -31,10 +31,10 @@ Component.prototype.determineDirection = function(relationCode) {
             break;
     }
 };
-Component.prototype.contains = function(node) {
+C4.Component.prototype.contains = function(node) {
     return this.nodes.indexOf(node) > -1;
 };
-Component.prototype.intersection = function(newComp) {
+C4.Component.prototype.intersection = function(newComp) {
     var sharedNodes = [];
     newComp.nodes.forEach(function(nNode, id, arr) {
         if (this.contains(nNode) == true) {
@@ -43,13 +43,13 @@ Component.prototype.intersection = function(newComp) {
     }, this);
     return sharedNodes;
 };
-Component.prototype.intersects = function(newComp) {
+C4.Component.prototype.intersects = function(newComp) {
     return this.intersection(newComp).length > 0;
 };
-Component.prototype.playerCheck = function(newComp) {
+C4.Component.prototype.playerCheck = function(newComp) {
     return newComp.player == this.player;
 };
-Component.prototype.difference = function(newComp) {
+C4.Component.prototype.difference = function(newComp) {
     var distincNodes = [];
     newComp.nodes.forEach(function(nNode, id, arr) {
         if (this.contains(nNode) == false) {
@@ -58,10 +58,10 @@ Component.prototype.difference = function(newComp) {
     }, this);
     return distincNodes;
 };
-Component.prototype.hasDistinctNodes = function(newComp) {
+C4.Component.prototype.hasDistinctNodes = function(newComp) {
     return this.difference(newComp).length > 0;
 };
-Component.prototype.union = function(newComp) {
+C4.Component.prototype.union = function(newComp) {
     var allNodes = [];
     this.nodes.forEach(function(oNode, id, arr) {
         allNodes.push(oNode);
@@ -73,13 +73,13 @@ Component.prototype.union = function(newComp) {
     }, this);
     return allNodes;
 };
-Component.prototype.addNode = function(newNode) {
+C4.Component.prototype.addNode = function(newNode) {
     if (this.contains(newNode) == false) {
         this.nodes.push(newNode);
         this.arity = this.nodes.length;
     };
 };
-Component.prototype.unionize = function(newComp) {
+C4.Component.prototype.unionize = function(newComp) {
     try {
         if (this.checkDirection(newComp) == false) {
             throw new Error("components have different orientations");
@@ -97,6 +97,6 @@ Component.prototype.unionize = function(newComp) {
         alert(err.message);
     }
 };
-Component.prototype.checkDirection = function(newComp) {
+C4.Component.prototype.checkDirection = function(newComp) {
     return newComp.direction == this.direction;
 };

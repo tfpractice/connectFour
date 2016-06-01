@@ -1,15 +1,15 @@
-describe('Component', function() {
+fdescribe('Component', function() {
     var n1, n2, n3, n4, n5, relCode, p1, p2, t1, t2, t3, t4, myComponent, my2Component, oComponenet;
     beforeEach(function() {
-        n1 = new Node(2, 3);
-        n2 = new Node(3, 2);
-        n3 = new Node(4, 1);
-        n4 = new Node(1, 4);
-        n5 = new Node(1, 3);
+        n1 = new C4.Node(2, 3);
+        n2 = new C4.Node(3, 2);
+        n3 = new C4.Node(4, 1);
+        n4 = new C4.Node(1, 4);
+        n5 = new C4.Node(1, 3);
         relCode = "rt";
         n1.setNeighbor(relCode, n2);
-        p1 = new Player("Jill");
-        p2 = new Player("Jack");
+        p1 = new C4.Player("Jill");
+        p2 = new C4.Player("Jack");
         t1 = new Token(p1, "#ff00ff");
         t2 = new Token(p1, "#ff00ff");
         t3 = new Token(p2, "#ff00ff");
@@ -19,9 +19,9 @@ describe('Component', function() {
         n3.placeToken(t2);
         n4.placeToken(t3);
         n5.placeToken(t4);
-        myComponent = new Component(n1, n2, relCode);
-        my2Component = new Component(n2, n3, "rt")
-        oComponenet = new Component(n3, n4, "ct");
+        myComponent = new C4.Component(n1, n2, relCode);
+        my2Component = new C4.Component(n2, n3, "rt")
+        oComponenet = new C4.Component(n3, n4, "ct");
     });
     describe('init', function() {
         it('initializes with an array of nodes', function() {

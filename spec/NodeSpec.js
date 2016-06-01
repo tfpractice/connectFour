@@ -78,7 +78,7 @@ fdescribe('Node', function() {
         describe('when there are matching neighbors', function() {
             it('creates a new component based on match', function() {
                 myCTNeighbor.placeToken(myToken);
-                var myComponent = new Component(myCTNeighbor, myNode, "cb");
+                var myComponent = new C4.Component(myCTNeighbor, myNode, "cb");
                 expect(myNode.player.components).toContain(myComponent);
             });
         });
@@ -144,7 +144,7 @@ fdescribe('Node', function() {
         describe('#getComponent', function() {
             it('returns a new component based on the matching neighboring nodes', function() {
                 myCTNeighbor.placeToken(myToken);
-                var myComponent = new Component(myNode, myCTNeighbor, "ct");
+                var myComponent = new C4.Component(myNode, myCTNeighbor, "ct");
                 expect(myNode.getComponent(myCTNeighbor, "ct")).toEqual(myComponent);
             });
         });
