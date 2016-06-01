@@ -2,7 +2,7 @@ fdescribe('Column', function() {
     var myColumn, myPlayer, myToken;
     beforeEach(function() {
         myColumn = new C4.Column(1, 6);
-        myPlayer = new Player("John");
+        myPlayer = new C4.Player("John");
         myToken = new Token(myPlayer, "#000000");
 
     });
@@ -43,7 +43,7 @@ fdescribe('Column', function() {
         });
         it('returns false if the freeIndex is less than zero', function() {
             tmpColumn = new C4.Column(3, 6);
-            tmpPlayer = new Player("zach");
+            tmpPlayer = new C4.Player("zach");
             for (var i = 0; i < 6; i++) {
                 tempToken = new Token(tmpPlayer, "#ff00ff");
                 tmpColumn.placeToken(tempToken);

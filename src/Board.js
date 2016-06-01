@@ -11,7 +11,7 @@ function Board(colCount, rowCount) {
 }
 Board.prototype.initColumns = function() {
     for (var i = 0; i < this.colCount; i++) {
-        this.columns[i] = new Column(i, this.rowCount);
+        this.columns[i] = new C4.Column(i, this.rowCount);
     };
 };
 Board.prototype.setHNeighbors = function() {

@@ -4,7 +4,7 @@ fdescribe('Node', function() {
     beforeEach(function() {
         myNode = new C4.Node(1, 3);
         myCTNeighbor = new C4.Node(1, 2);
-        myPlayer = new Player("John");
+        myPlayer = new C4.Player("John");
         myToken = new Token(myPlayer, "#000000");
         mySecondToken = new Token(myPlayer, "#000000");
     });
