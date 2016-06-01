@@ -1,4 +1,4 @@
-function Board(colCount, rowCount) {
+C4.Board = function(colCount, rowCount) {
     this.colCount = colCount;
     this.rowCount = rowCount;
     this.columns = [];
@@ -9,12 +9,12 @@ function Board(colCount, rowCount) {
     this.setNDNeighbors();
     this.domElement = d3.select(document.createElementNS(d3.ns.prefix.svg, 'g')).node();
 }
-Board.prototype.initColumns = function() {
+C4.Board.prototype.initColumns = function() {
     for (var i = 0; i < this.colCount; i++) {
         this.columns[i] = new C4.Column(i, this.rowCount);
     };
 };
-Board.prototype.setHNeighbors = function() {
+C4.Board.prototype.setHNeighbors = function() {
     for (var i = 0; i < this.colCount - 1; i++) {
         var currCol = this.columns[i];
         var nextCol = this.columns[i + 1];
@@ -26,7 +26,7 @@ Board.prototype.setHNeighbors = function() {
         };
     };
 };
-Board.prototype.setPDNeighbors = function() {
+C4.Board.prototype.setPDNeighbors = function() {
     for (var i = 0; i < this.colCount - 1; i++) {
         var currCol = this.columns[i];
         var nextCol = this.columns[i + 1];
@@ -38,7 +38,7 @@ Board.prototype.setPDNeighbors = function() {
         };
     };
 };
-Board.prototype.setNDNeighbors = function() {
+C4.Board.prototype.setNDNeighbors = function() {
     for (var i = this.colCount - 1; i > 0; i--) {
         var currCol = this.columns[i];
         var nextCol = this.columns[i - 1];
@@ -50,7 +50,7 @@ Board.prototype.setNDNeighbors = function() {
         };
     };
 };
-Board.prototype.placeToken = function(token, colIndex) {
+C4.Board.prototype.placeToken = function(token, colIndex) {
     var currCol = this.columns[colIndex];
     try {
         if (currCol.isAvailable() == false) {

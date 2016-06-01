@@ -1,8 +1,8 @@
-describe('Board', function() {
+fdescribe('Board', function() {
     var myBoard, myPlayer, myToken;
     beforeEach(function() {
-        myBoard = new Board(7, 6);
-        myPlayer = new Player("John");
+        myBoard = new C4.Board(7, 6);
+        myPlayer = new C4.Player("John");
         myToken = new Token(myPlayer, "#000000");
     });
     describe('init', function() {
