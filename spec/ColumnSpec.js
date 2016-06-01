@@ -3,7 +3,7 @@ fdescribe('Column', function() {
     beforeEach(function() {
         myColumn = new C4.Column(1, 6);
         myPlayer = new C4.Player("John");
-        myToken = new Token(myPlayer, "#000000");
+        myToken = new C4.Token(myPlayer, "#000000");
 
     });
     describe('init', function() {
@@ -45,7 +45,7 @@ fdescribe('Column', function() {
             tmpColumn = new C4.Column(3, 6);
             tmpPlayer = new C4.Player("zach");
             for (var i = 0; i < 6; i++) {
-                tempToken = new Token(tmpPlayer, "#ff00ff");
+                tempToken = new C4.Token(tmpPlayer, "#ff00ff");
                 tmpColumn.placeToken(tempToken);
             };
             expect(tmpColumn.isAvailable()).toBeFalsy();

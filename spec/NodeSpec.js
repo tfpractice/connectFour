@@ -5,8 +5,8 @@ fdescribe('Node', function() {
         myNode = new C4.Node(1, 3);
         myCTNeighbor = new C4.Node(1, 2);
         myPlayer = new C4.Player("John");
-        myToken = new Token(myPlayer, "#000000");
-        mySecondToken = new Token(myPlayer, "#000000");
+        myToken = new C4.Token(myPlayer, "#000000");
+        mySecondToken = new C4.Token(myPlayer, "#000000");
     });
     describe('initiallization', function() {
         it('initializes with a column index', function() {
@@ -84,7 +84,7 @@ fdescribe('Node', function() {
         });
         describe('when multiple matching neighbors can become one component', function() {
             it('combines the players components', function() {
-                var myThirdToken = new Token(myPlayer, "#000000");
+                var myThirdToken = new C4.Token(myPlayer, "#000000");
                 var myCBNeighbor = new C4.Node(1, 4);
                 myNode.setNeighbor("cb", myCBNeighbor);
                 myCBNeighbor.setNeighbor("ct", myNode);

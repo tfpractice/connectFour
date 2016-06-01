@@ -36,8 +36,8 @@ C4.Game.prototype.distributeTokens = function() {
     var tokenCount = 7 * 6;
     var splitCount = Math.ceil(tokenCount / 2);
     for (var i = 0; i < splitCount; i++) {
-        var p1Token = new Token(this.player1, "#ff0000");
-        var p2Token = new Token(this.player2, "#000000");
+        var p1Token = new C4.Token(this.player1, "#ff0000");
+        var p2Token = new C4.Token(this.player2, "#000000");
         this.player1.addToken(p1Token);
         this.player2.addToken(p2Token);
     };

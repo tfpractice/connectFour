@@ -3,7 +3,7 @@ fdescribe('Board', function() {
     beforeEach(function() {
         myBoard = new C4.Board(7, 6);
         myPlayer = new C4.Player("John");
-        myToken = new Token(myPlayer, "#000000");
+        myToken = new C4.Token(myPlayer, "#000000");
     });
     describe('init', function() {
         it('initialuzes with a colCount', function() {
@@ -59,9 +59,9 @@ fdescribe('Board', function() {
         });
         it('throws an error /returns false if selected Column is not available', function() {
             var tmpColumn = myBoard.columns[2];
-            var trialToken = new Token(myPlayer, "#ff00ff");
+            var trialToken = new C4.Token(myPlayer, "#ff00ff");
             for (var i = 0; i < 6; i++) {
-                tempToken = new Token(myPlayer, "#ff00ff");
+                tempToken = new C4.Token(myPlayer, "#ff00ff");
                 tmpColumn.placeToken(tempToken);
             };
             expect(myBoard.placeToken(trialToken, 2)).toThrowAnyError();

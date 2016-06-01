@@ -3,9 +3,9 @@ fdescribe('Player', function() {
     beforeEach(function() {
         myBoard = new C4.Board(7, 6);
         myPlayer = new C4.Player("John");
-        t1 = new Token(myPlayer, "#ff00ff");
-        t2 = new Token(myPlayer, "#ff00ff");
-        t3 = new Token(myPlayer, "#ff00ff");
+        t1 = new C4.Token(myPlayer, "#ff00ff");
+        t2 = new C4.Token(myPlayer, "#ff00ff");
+        t3 = new C4.Token(myPlayer, "#ff00ff");
         n1 = myBoard.columns[2].nodes[3];
         n2 = myBoard.columns[3].nodes[2];
         n3 = myBoard.columns[4].nodes[1];
@@ -127,9 +127,9 @@ fdescribe('Player', function() {
                 var n23 = myBoard.columns[2].nodes[3];
                 var n33 = myBoard.columns[3].nodes[3];
                 var n43 = myBoard.columns[4].nodes[3];
-                var t23 = new Token(myPlayer, "#ff0000");
-                var t33 = new Token(myPlayer, "#ff0000");
-                var t43 = new Token(myPlayer, "#ff0000");
+                var t23 = new C4.Token(myPlayer, "#ff0000");
+                var t33 = new C4.Token(myPlayer, "#ff0000");
+                var t43 = new C4.Token(myPlayer, "#ff0000");
                 n23.placeToken(t23);
                 n33.placeToken(t33);
                 n43.placeToken(t43);
@@ -147,10 +147,10 @@ fdescribe('Player', function() {
                 var n23 = myBoard.columns[2].nodes[3];
                 var n33 = myBoard.columns[3].nodes[3];
                 var n43 = myBoard.columns[4].nodes[3];
-                var t13 = new Token(myPlayer, "#ff0000");
-                var t23 = new Token(myPlayer, "#ff0000");
-                var t33 = new Token(myPlayer, "#ff0000");
-                var t43 = new Token(myPlayer, "#ff0000");
+                var t13 = new C4.Token(myPlayer, "#ff0000");
+                var t23 = new C4.Token(myPlayer, "#ff0000");
+                var t33 = new C4.Token(myPlayer, "#ff0000");
+                var t43 = new C4.Token(myPlayer, "#ff0000");
                 n13.placeToken(t13);
                 n23.placeToken(t23);
                 n33.placeToken(t33);
@@ -164,10 +164,10 @@ fdescribe('Player', function() {
                 var n23 = myBoard.columns[2].nodes[3];
                 var n33 = myBoard.columns[3].nodes[3];
                 var n43 = myBoard.columns[4].nodes[3];
-                var t13 = new Token(myPlayer, "#ff0000");
-                var t23 = new Token(myPlayer, "#ff0000");
-                var t33 = new Token(myPlayer, "#ff0000");
-                var t43 = new Token(myPlayer, "#ff0000");
+                var t13 = new C4.Token(myPlayer, "#ff0000");
+                var t23 = new C4.Token(myPlayer, "#ff0000");
+                var t33 = new C4.Token(myPlayer, "#ff0000");
+                var t43 = new C4.Token(myPlayer, "#ff0000");
                 n13.placeToken(t13);
                 n23.placeToken(t23);
                 n33.placeToken(t33);
@@ -179,14 +179,14 @@ fdescribe('Player', function() {
 
         describe('addToken', function() {
             it('adds a token to the players token array', function() {
-                var tmpToken = new Token(myPlayer, "#ff0000");
+                var tmpToken = new C4.Token(myPlayer, "#ff0000");
                 myPlayer.addToken(tmpToken);
                 expect(myPlayer.tokenIndex).toBe(0);
             });
         });
         describe('getNextToken', function() {
             it('returns the next available token', function() {
-                var tmpToken = new Token(myPlayer, "#ff0000");
+                var tmpToken = new C4.Token(myPlayer, "#ff0000");
                 myPlayer.addToken(tmpToken);
                 expect(myPlayer.getNextToken()).toBe(tmpToken);
             });

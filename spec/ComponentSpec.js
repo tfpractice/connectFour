@@ -10,10 +10,10 @@ fdescribe('Component', function() {
         n1.setNeighbor(relCode, n2);
         p1 = new C4.Player("Jill");
         p2 = new C4.Player("Jack");
-        t1 = new Token(p1, "#ff00ff");
-        t2 = new Token(p1, "#ff00ff");
-        t3 = new Token(p2, "#ff00ff");
-        t4 = new Token(p2, "#ff00ff");
+        t1 = new C4.Token(p1, "#ff00ff");
+        t2 = new C4.Token(p1, "#ff00ff");
+        t3 = new C4.Token(p2, "#ff00ff");
+        t4 = new C4.Token(p2, "#ff00ff");
         n1.placeToken(t1);
         n2.placeToken(t1);
         n3.placeToken(t2);
