@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: Token.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,28 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: Token.js</h1>
 
     
 
 
 
     
-
-
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * a connect four token
+ * @constructor C4.Token
+ * @param {C4.Player} player the player owning the token
+ * @param {Color} color
+ */
+C4.Token = function(player, color) {
+    this.player = player;
+    this.color = color;
+    this.domElement = d3.select(document.createElementNS(d3.ns.prefix.svg, 'circle')).node();
+};</code></pre>
+        </article>
+    </section>
 
 
 
