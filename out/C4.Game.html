@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: Column</title>
+    <title>JSDoc: Class: Game</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: Column</h1>
+    <h1 class="page-title">Class: Game</h1>
 
     
 
@@ -29,7 +29,7 @@
 <header>
     
         <h2>
-            <span class="ancestors"><a href="C4.html">C4</a>.</span>Column</h2>
+            <span class="ancestors"><a href="C4.html">C4</a>.</span>Game</h2>
         
     
 </header>
@@ -41,14 +41,14 @@
 
     
 
-    <h4 class="name" id="Column"><span class="type-signature"></span>new Column<span class="signature">(index, nodeCount)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="Game"><span class="type-signature"></span>new Game<span class="signature">(p1, p2)</span><span class="type-signature"></span></h4>
 
     
 
 
 
 <div class="description">
-    represents a column on the connect four board
+    A game of Connect Four
 </div>
 
 
@@ -84,13 +84,13 @@
 
         <tr>
             
-                <td class="name"><code>index</code></td>
+                <td class="name"><code>p1</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Number</span>
+<span class="param-type"><a href="C4.Player.html">C4.Player</a></span>
 
 
             
@@ -100,20 +100,20 @@
 
             
 
-            <td class="description last">the position of the column in the board</td>
+            <td class="description last">the first player</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>nodeCount</code></td>
+                <td class="name"><code>p2</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Number</span>
+<span class="param-type"><a href="C4.Player.html">C4.Player</a></span>
 
 
             
@@ -123,7 +123,7 @@
 
             
 
-            <td class="description last">the number of nodes to create for this column</td>
+            <td class="description last">the second player</td>
         </tr>
 
     
@@ -161,7 +161,122 @@
 
         <tr>
             
-                <td class="name"><code>index</code></td>
+                <td class="name"><code>player1</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="C4.Player.html">C4.Player</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>player2\</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="C4.Player.html">C4.Player</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>players</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;<a href="C4.Player.html">C4.Player</a>></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>board</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="C4.Board.html">C4.Board</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>currentPlayer</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="C4.Player.html">C4.Player</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>currentColIndex</code></td>
             
 
             <td class="type">
@@ -177,20 +292,20 @@
 
             
 
-            <td class="description last">the position of the column in the board</td>
+            <td class="description last">index of the current column</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>nodeCount</code></td>
+                <td class="name"><code>winCoordinates</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Number</span>
+<span class="param-type">Array.&lt;Number></span>
 
 
             
@@ -200,53 +315,7 @@
 
             
 
-            <td class="description last">the number of nodes to create for this column</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>nodes</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Array.&lt;<a href="C4.Node.html">C4.Node</a>></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">the nodes in this column</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>freeIndex</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">the topMost unoccupied row position</td>
+            <td class="description last">the start and ending indices of the winning component</td>
         </tr>
 
     
@@ -285,7 +354,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Column.js.html">Column.js</a>, <a href="Column.js.html#line1">line 1</a>
+        <a href="Game.js.html">Game.js</a>, <a href="Game.js.html#line1">line 1</a>
     </li></ul></dd>
     
 
@@ -325,154 +394,6 @@
     
 
     
-        <h3 class="subsection-title">Members</h3>
-
-        
-            
-<h4 class="name" id="colClick"><span class="type-signature"></span>colClick<span class="type-signature"> :CustomEvent</span></h4>
-
-
-
-
-<div class="description">
-    an Event triggered when the domElement is clicked
-</div>
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type">CustomEvent</span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Column.js.html">Column.js</a>, <a href="Column.js.html#line28">line 28</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-        
-            
-<h4 class="name" id="domElement"><span class="type-signature"></span>domElement<span class="type-signature"> :d3.svg</span></h4>
-
-
-
-
-<div class="description">
-    DOM element representing the column
-</div>
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type">d3.svg</span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Column.js.html">Column.js</a>, <a href="Column.js.html#line22">line 22</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-        
-    
 
     
         <h3 class="subsection-title">Methods</h3>
@@ -482,14 +403,14 @@
 
     
 
-    <h4 class="name" id="addNode"><span class="type-signature"></span>addNode<span class="signature">(node)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="assembleWinningCoordinates"><span class="type-signature"></span>assembleWinningCoordinates<span class="signature">(winArray)</span><span class="type-signature"></span></h4>
 
     
 
 
 
 <div class="description">
-    adds a node to the nodes array
+    assembles the winning coordinate based on the winning array of node
 </div>
 
 
@@ -525,13 +446,13 @@
 
         <tr>
             
-                <td class="name"><code>node</code></td>
+                <td class="name"><code>winArray</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type"><a href="C4.Node.html">C4.Node</a></span>
+<span class="param-type">Array.&lt;C4.node></span>
 
 
             
@@ -541,7 +462,7 @@
 
             
 
-            <td class="description last">new node</td>
+            <td class="description last">the winning array</td>
         </tr>
 
     
@@ -582,7 +503,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Column.js.html">Column.js</a>, <a href="Column.js.html#line42">line 42</a>
+        <a href="Game.js.html">Game.js</a>, <a href="Game.js.html#line96">line 96</a>
     </li></ul></dd>
     
 
@@ -613,14 +534,14 @@
 
     
 
-    <h4 class="name" id="decrementIndex"><span class="type-signature"></span>decrementIndex<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="distributeTokens"><span class="type-signature"></span>distributeTokens<span class="signature">()</span><span class="type-signature"></span></h4>
 
     
 
 
 
 <div class="description">
-    decreases the index of the available node by 1
+    distributes half of tokens (rowCount * colCount) to each player
 </div>
 
 
@@ -664,7 +585,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Column.js.html">Column.js</a>, <a href="Column.js.html#line80">line 80</a>
+        <a href="Game.js.html">Game.js</a>, <a href="Game.js.html#line54">line 54</a>
     </li></ul></dd>
     
 
@@ -695,15 +616,11 @@
 
     
 
-    <h4 class="name" id="initializeNodes"><span class="type-signature"></span>initializeNodes<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="getToken"><span class="type-signature"></span>getToken<span class="signature">()</span><span class="type-signature"> &rarr; {C4.Token}</span></h4>
 
     
 
 
-
-<div class="description">
-    initializes nodes based on nodeCount
-</div>
 
 
 
@@ -746,89 +663,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Column.js.html">Column.js</a>, <a href="Column.js.html#line48">line 48</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="isAvailable"><span class="type-signature"></span>isAvailable<span class="signature">()</span><span class="type-signature"> &rarr; {Boolean}</span></h4>
-
-    
-
-
-
-<div class="description">
-    checks if any of the nodes are unoccupied
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Column.js.html">Column.js</a>, <a href="Column.js.html#line57">line 57</a>
+        <a href="Game.js.html">Game.js</a>, <a href="Game.js.html#line108">line 108</a>
     </li></ul></dd>
     
 
@@ -855,7 +690,7 @@
 
         
 <div class="param-desc">
-    availability
+    the current players next available token
 </div>
 
 
@@ -866,7 +701,7 @@
     </dt>
     <dd>
         
-<span class="param-type">Boolean</span>
+<span class="param-type">C4.Token</span>
 
 
     </dd>
@@ -881,14 +716,96 @@
 
     
 
-    <h4 class="name" id="placeToken"><span class="type-signature"></span>placeToken<span class="signature">(token)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="playToken"><span class="type-signature"></span>playToken<span class="signature">()</span><span class="type-signature"></span></h4>
 
     
 
 
 
 <div class="description">
-    places a token in the topmost available node
+    places the current players next token in the selected column
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Game.js.html">Game.js</a>, <a href="Game.js.html#line76">line 76</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="selectColumn"><span class="type-signature"></span>selectColumn<span class="signature">(colIndex)</span><span class="type-signature"> &rarr; {<a href="C4.Column.html">C4.Column</a>}</span></h4>
+
+    
+
+
+
+<div class="description">
+    selects a column based on its index
 </div>
 
 
@@ -924,13 +841,13 @@
 
         <tr>
             
-                <td class="name"><code>token</code></td>
+                <td class="name"><code>colIndex</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">C4.Token</span>
+<span class="param-type">Number</span>
 
 
             
@@ -940,7 +857,7 @@
 
             
 
-            <td class="description last"></td>
+            <td class="description last">the index of the desired column</td>
         </tr>
 
     
@@ -981,7 +898,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Column.js.html">Column.js</a>, <a href="Column.js.html#line87">line 87</a>
+        <a href="Game.js.html">Game.js</a>, <a href="Game.js.html#line69">line 69</a>
     </li></ul></dd>
     
 
@@ -1004,6 +921,28 @@
 
 
 
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    the specified column
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="C4.Column.html">C4.Column</a></span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -1012,14 +951,14 @@
 
     
 
-    <h4 class="name" id="setVerticalNeighbors"><span class="type-signature"></span>setVerticalNeighbors<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="switchPlayer"><span class="type-signature"></span>switchPlayer<span class="signature">()</span><span class="type-signature"></span></h4>
 
     
 
 
 
 <div class="description">
-    assigns center-top(CT) and center-bottom relationships for each node
+    toggles the currentPlayer between the two players
 </div>
 
 
@@ -1063,7 +1002,89 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Column.js.html">Column.js</a>, <a href="Column.js.html#line69">line 69</a>
+        <a href="Game.js.html">Game.js</a>, <a href="Game.js.html#line46">line 46</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="visualize"><span class="type-signature"></span>visualize<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    visualizes the gameboard via d3.js
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Game.js.html">Game.js</a>, <a href="Game.js.html#line124">line 124</a>
     </li></ul></dd>
     
 
